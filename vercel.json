@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://travel-companion-matching-backend.onrender.com/api/$1"
+      "destination": "https://matchandmap-withme.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",
