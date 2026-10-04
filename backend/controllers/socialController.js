@@ -16,11 +16,23 @@ export async function listBuddies(req, res) {
       })
     }
 
+    const currentUserId = (req.user._id || req.user.id || req.user.sub || "").toString()
+    const currentUserEmail = (req.user.email || "").toLowerCase().trim()
+
     const currentUser =
-      allUsers.find((u) => (u._id?.toString() || u.id) === currentUserId) || req.user
-    const otherUsers = allUsers.filter(
-      (u) => (u._id?.toString() || u.id) !== currentUserId && u.role !== "admin"
-    )
+      allUsers.find((u) => {
+        const uId = (u._id || u.id || "").toString()
+        const uEmail = (u.email || "").toLowerCase().trim()
+        return (currentUserId && uId === currentUserId) || (currentUserEmail && uEmail === currentUserEmail)
+      }) || req.user
+
+    const otherUsers = allUsers.filter((u) => {
+      const uId = (u._id || u.id || "").toString()
+      const uEmail = (u.email || "").toLowerCase().trim()
+      if (currentUserId && uId === currentUserId) return false
+      if (currentUserEmail && uEmail === currentUserEmail) return false
+      return u.role !== "admin"
+    })
 
     const matches = otherUsers.map((user) => {
       const userInterests = Array.isArray(user.interests) ? user.interests : []

@@ -558,7 +558,21 @@ export default function Buddies({ user, onNav }: BuddiesProps) {
 
         if (isMounted) {
           if (Array.isArray(liveMatches)) {
-            setProfiles(liveMatches)
+            const currentId = (user?.id || user?._id || "").toString().toLowerCase()
+            const currentEmail = (user?.email || "").toLowerCase().trim()
+            const currentName = (user?.name || "").toLowerCase().trim()
+
+            const cleanMatches = liveMatches.filter((m) => {
+              const mId = (m.user?.id || m.user?._id || "").toString().toLowerCase()
+              const mEmail = (m.user?.email || "").toLowerCase().trim()
+              const mName = (m.user?.name || "").toLowerCase().trim()
+
+              if (currentId && mId && mId === currentId) return false
+              if (currentEmail && mEmail && mEmail === currentEmail) return false
+              if (currentName && mName && mName === currentName) return false
+              return true
+            })
+            setProfiles(cleanMatches)
           } else {
             setProfiles([])
           }
