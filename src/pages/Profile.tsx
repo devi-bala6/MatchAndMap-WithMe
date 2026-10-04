@@ -257,7 +257,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
 
       {/* Profile header card */}
       <div
-        className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 p-5 sm:p-6 rounded-2xl mb-6 text-center sm:text-left"
+        className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl mb-6 text-center sm:text-left overflow-hidden"
         style={{
           background:
             "linear-gradient(135deg, rgba(13, 21, 37, 0.85), rgba(20, 30, 53, 0.85))",
@@ -266,14 +266,14 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
         }}
       >
-        <div className="relative">
-          <Avatar name={profile.name} size={96} radius={16} />
+        <div className="relative shrink-0">
+          <Avatar name={profile.name} size={88} radius={16} />
           {profile.verified && (
             <span
               className="absolute -bottom-1 -right-1 flex items-center justify-center font-mono text-xs font-bold"
               style={{
-                width: 26,
-                height: 26,
+                width: 24,
+                height: 24,
                 borderRadius: "50%",
                 background: "#0ea5e9",
                 color: "#080d1a",
@@ -283,20 +283,20 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             </span>
           )}
         </div>
-        <div className="flex-1">
+        <div className="flex-1 w-full">
           <h3
-            className="font-display font-bold text-2xl mb-1"
+            className="font-display font-bold text-xl sm:text-2xl mb-1"
             style={{ color: "#e2e8f0" }}
           >
             {profile.name}
           </h3>
-          <p className="font-mono text-xs mb-3" style={{ color: "#475569" }}>
+          <p className="font-mono text-xs mb-3 break-words" style={{ color: "#94a3b8" }}>
             {profile.age} · {profile.nationality} · {profile.gender} · Joined{" "}
             {profile.joinedDate}
           </p>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
             <div
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
               style={{
                 background: "rgba(245,158,11,0.1)",
                 border: "1px solid rgba(245,158,11,0.2)",
@@ -304,50 +304,50 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             >
               <span style={{ color: "#f59e0b" }}>★</span>
               <span
-                className="font-mono text-sm font-semibold"
+                className="font-mono text-xs sm:text-sm font-semibold"
                 style={{ color: "#f59e0b" }}
               >
                 {profile.rating}
               </span>
-              <span className="font-mono text-xs" style={{ color: "#64748b" }}>
+              <span className="font-mono text-[11px]" style={{ color: "#64748b" }}>
                 rating
               </span>
             </div>
             <div
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg"
               style={{
                 background: "rgba(14,165,233,0.1)",
                 border: "1px solid rgba(14,165,233,0.2)",
               }}
             >
               <span
-                className="font-mono text-sm font-semibold"
+                className="font-mono text-xs sm:text-sm font-semibold"
                 style={{ color: "#0ea5e9" }}
               >
                 {profile.tripsCount}
               </span>
-              <span className="font-mono text-xs" style={{ color: "#64748b" }}>
+              <span className="font-mono text-[11px]" style={{ color: "#64748b" }}>
                 trips
               </span>
             </div>
             <div
-              className={`badge ${
+              className={`badge text-[11px] sm:text-xs ${
                 profile.verified ? "badge-green" : "badge-amber"
               }`}
             >
-              {profile.verified ? "✓ Verified" : "⏳ Pending Verification"}
+              {profile.verified ? "✓ Verified" : "⏳ Pending"}
             </div>
-            <div className="badge badge-purple">JWT Secured</div>
+            <div className="badge badge-purple text-[11px] sm:text-xs">JWT Secured</div>
           </div>
         </div>
-        <div className="text-right">
-          <p className="font-mono text-xs mb-1" style={{ color: "#475569" }}>
+        <div className="text-center sm:text-right w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800/80 shrink-0">
+          <p className="font-mono text-[11px] mb-0.5" style={{ color: "#475569" }}>
             MEMBER SINCE
           </p>
-          <p className="font-display font-bold" style={{ color: "#e2e8f0" }}>
+          <p className="font-display font-bold text-sm sm:text-base" style={{ color: "#e2e8f0" }}>
             {profile.joinedDate}
           </p>
-          <p className="font-mono text-xs mt-1" style={{ color: "#475569" }}>
+          <p className="font-mono text-[11px] mt-0.5" style={{ color: "#0ea5e9" }}>
             {profile.role.toUpperCase()}
           </p>
         </div>
@@ -355,14 +355,14 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
 
       {/* Tab navigation */}
       <div
-        className="flex gap-0 mb-6 overflow-x-auto whitespace-nowrap"
+        className="flex gap-1 mb-6 overflow-x-auto whitespace-nowrap pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none"
         style={{ borderBottom: "1px solid #1a2845" }}
       >
         {tabs.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className="px-5 py-3 font-display font-semibold text-sm transition-all"
+            className="px-3.5 sm:px-5 py-2.5 sm:py-3 font-display font-semibold text-xs sm:text-sm transition-all shrink-0"
             style={
               tab === t.id
                 ? {
@@ -650,7 +650,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
 
           <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
             <div
-              className="flex items-center justify-between rounded-xl p-3"
+              className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl p-3.5 sm:p-4"
               style={{
                 background: "rgba(14,165,233,0.06)",
                 border: "1px solid rgba(14,165,233,0.2)",
@@ -663,7 +663,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                 >
                   Current Location
                 </p>
-                <p className="font-mono text-xs" style={{ color: "#64748b" }}>
+                <p className="font-mono text-xs mt-0.5" style={{ color: "#64748b" }}>
                   {profile.city && profile.state
                     ? `${profile.city}, ${profile.state}`
                     : "Location not set yet"}
@@ -672,15 +672,15 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               <button
                 type="button"
                 onClick={useCurrentLocation}
-                className="btn-primary px-4 py-2 text-xs"
+                className="btn-primary px-4 py-2.5 text-xs w-full sm:w-auto text-center"
               >
-                Use my current location
+                📍 Use my current location
               </button>
             </div>
 
             {locationStatus.type !== "idle" && (
               <div
-                className="px-4 py-3 rounded-lg font-mono text-xs"
+                className="px-4 py-3 rounded-lg font-mono text-xs break-words"
                 style={{
                   background:
                     locationStatus.type === "success"
@@ -698,8 +698,8 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               </div>
             )}
 
-            <div className="flex justify-end">
-              <button onClick={handleSave} className="btn-primary px-8">
+            <div className="flex justify-end pt-2">
+              <button onClick={handleSave} className="btn-primary px-8 w-full sm:w-auto">
                 {saved ? "✓ Saved!" : "Save Changes"}
               </button>
             </div>
@@ -711,13 +711,13 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
       {tab === "beneficiary" && (
         <div>
           <div
-            className="p-4 rounded-xl mb-6 flex gap-3"
+            className="p-4 rounded-xl mb-6 flex gap-3 items-start"
             style={{
               background: "rgba(245,158,11,0.06)",
               border: "1px solid rgba(245,158,11,0.2)",
             }}
           >
-            <span className="text-xl">⚠️</span>
+            <span className="text-xl shrink-0">⚠️</span>
             <div>
               <p
                 className="font-display font-semibold text-sm mb-1"
@@ -725,7 +725,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               >
                 Why this matters
               </p>
-              <p className="text-sm" style={{ color: "#94a3b8" }}>
+              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
                 In an emergency, TravelMate automatically shares your full trip
                 details, current location, and companion information with your
                 designated beneficiary. Keep this updated at all times.
@@ -733,7 +733,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             <div>
               <label
                 className="block font-display font-medium text-sm mb-2"
@@ -803,7 +803,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                 placeholder="beneficiary@email.com"
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <label
                 className="block font-display font-medium text-sm mb-2"
                 style={{ color: "#94a3b8" }}
@@ -822,13 +822,13 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
 
           {/* What gets shared */}
           <div
-            className="mt-6 p-5 rounded-xl"
+            className="mt-6 p-4 sm:p-5 rounded-xl"
             style={{ background: "#0d1525", border: "1px solid #1a2845" }}
           >
-            <p className="font-mono text-xs mb-4" style={{ color: "#0ea5e9" }}>
+            <p className="font-mono text-xs mb-3 font-semibold" style={{ color: "#0ea5e9" }}>
               WHAT GETS SHARED IN AN EMERGENCY
             </p>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
               {[
                 "Your full name and photo",
                 "Current GPS coordinates",
@@ -841,18 +841,18 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-center gap-2 text-sm"
+                  className="flex items-center gap-2 text-xs sm:text-sm"
                   style={{ color: "#94a3b8" }}
                 >
-                  <span style={{ color: "#4ade80" }}>✓</span>
-                  {item}
+                  <span className="shrink-0 font-bold" style={{ color: "#4ade80" }}>✓</span>
+                  <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="flex justify-end mt-6">
-            <button onClick={handleSave} className="btn-primary px-8">
+            <button onClick={handleSave} className="btn-primary px-8 w-full sm:w-auto">
               {saved ? "✓ Saved!" : "Update Beneficiary"}
             </button>
           </div>
