@@ -75,7 +75,21 @@ export default function Dashboard({ user, onNav }: DashboardProps) {
         ])
 
         if (Array.isArray(liveMatches)) {
-          setBuddies(liveMatches)
+          const currentId = (user?.id || (user as any)?._id || "").toString().toLowerCase()
+          const currentEmail = (user?.email || "").toLowerCase().trim()
+          const currentName = (user?.name || "").toLowerCase().trim()
+
+          const cleanMatches = liveMatches.filter((m) => {
+            const mId = (m.user?.id || (m.user as any)?._id || "").toString().toLowerCase()
+            const mEmail = (m.user?.email || "").toLowerCase().trim()
+            const mName = (m.user?.name || "").toLowerCase().trim()
+
+            if (currentId && mId && mId === currentId) return false
+            if (currentEmail && mEmail && mEmail === currentEmail) return false
+            if (currentName && mName && mName === currentName) return false
+            return true
+          })
+          setBuddies(cleanMatches)
         }
         if (Array.isArray(liveConns)) {
           setConnectionsCount(
