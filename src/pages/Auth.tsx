@@ -89,7 +89,10 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       else onRegister(result.user)
     } catch (requestError: any) {
       console.error("Authentication error:", requestError)
-      const msg = requestError?.message || "Authentication failed. Please check your credentials."
+      let msg = requestError?.message || "Authentication failed. Please check your credentials."
+      if (isLogin && (msg.toLowerCase().includes("invalid email") || msg.toLowerCase().includes("invalid credentials"))) {
+        msg = "No account found with this email or incorrect password. Please click 'Create account' below to register first."
+      }
       setError(msg)
     } finally {
       setLoading(false)
