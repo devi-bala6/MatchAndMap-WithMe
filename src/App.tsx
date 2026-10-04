@@ -383,7 +383,7 @@ export default function App() {
           </main>
 
           {/* Bottom Navigation for mobile users */}
-          <MobileNav current={view} onNav={handleNav} />
+          <MobileNav current={view} onNav={handleNav} role={user?.role} />
         </div>
       </div>
     )

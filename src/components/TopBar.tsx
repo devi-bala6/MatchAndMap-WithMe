@@ -191,11 +191,12 @@ export default function TopBar({
         {/* Eco score badge (Clickable to open breakdown & improvement hub) */}
         <button
           onClick={() => setIsEcoModalOpen(true)}
-          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs font-semibold hover:bg-emerald-500/20 transition-all cursor-pointer shadow-sm"
+          className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[11px] sm:text-xs font-semibold hover:bg-emerald-500/20 transition-all cursor-pointer shadow-sm"
           title="Click to view Eco Score breakdown & boost your score"
         >
           <Leaf className="w-3.5 h-3.5" />
-          <span>Eco {user?.ecoScore ?? ecoScore}</span>
+          <span className="hidden xs:inline">Eco</span>
+          <span>{user?.ecoScore ?? ecoScore}</span>
         </button>
 
         <EcoScoreModal
