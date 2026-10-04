@@ -44,6 +44,30 @@ export default function SOS({ user }: SOSProps) {
   const [batteryLevel, setBatteryLevel] = useState<number | null>(null)
   const [isCharging, setIsCharging] = useState(false)
   const [activeAlerts, setActiveAlerts] = useState<any[]>([])
+  const [connectedCompanions, setConnectedCompanions] = useState<any[]>([])
+
+  // Load real accepted connections for current user
+  useEffect(() => {
+    apiRequest<any[]>("/connections")
+      .then((conns) => {
+        if (Array.isArray(conns)) {
+          const accepted = conns.filter((c) => c.status === "accepted")
+          const companionList = accepted.map((c) => {
+            const isIncoming = (c.toUserId === user?.id || c.toUserId === (user as any)?._id)
+            const other = isIncoming && typeof c.from === "object" ? c.from : null
+            return {
+              name: other?.name || (isIncoming ? "Connected Buddy" : "Travel Companion"),
+              role: other?.travelStyle || "Companion",
+              phone: other?.phone || "",
+            }
+          })
+          setConnectedCompanions(companionList)
+        }
+      })
+      .catch(() => {
+        setConnectedCompanions([])
+      })
+  }, [user?.id])
 
   // Keep beneficiary in sync with user prop & profile API
   useEffect(() => {
@@ -431,38 +455,41 @@ export default function SOS({ user }: SOSProps) {
 
             <div className="space-y-2 pt-2">
               <span className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-                Confirmed Trip Companions
+                Confirmed Trip Companions ({connectedCompanions.length})
               </span>
-              <div className="space-y-2">
-                {[
-                  {
-                    name: "Sofia Andersen",
-                    role: "Trek Buddy",
-                    phone: "+45 12345678",
-                  },
-                ].map((c) => (
-                  <div
-                    key={c.name}
-                    className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <Avatar name={c.name} size={30} />
-                      <div>
-                        <p className="text-xs font-semibold text-slate-200">
-                          {c.name}
-                        </p>
-                        <p className="text-[10px] font-mono text-slate-500">
-                          {c.role}
-                        </p>
+              {connectedCompanions.length > 0 ? (
+                <div className="space-y-2">
+                  {connectedCompanions.map((c, i) => (
+                    <div
+                      key={i}
+                      className="p-3 rounded-xl bg-slate-950/40 border border-slate-800/80 flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <Avatar name={c.name} size={30} />
+                        <div>
+                          <p className="text-xs font-semibold text-slate-200">
+                            {c.name}
+                          </p>
+                          <p className="text-[10px] font-mono text-slate-500">
+                            {c.role}
+                          </p>
+                        </div>
                       </div>
+                      <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        Live Connected
+                      </span>
                     </div>
-                    <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      Live Connected
-                    </span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-3.5 rounded-xl bg-slate-950/40 border border-dashed border-slate-800 text-center">
+                  <p className="text-xs text-slate-400 font-medium">No buddies connected yet</p>
+                  <p className="text-[11px] text-slate-600 mt-1 font-mono">
+                    Accept connection requests in Travel Buddies to link emergency telemetry
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
