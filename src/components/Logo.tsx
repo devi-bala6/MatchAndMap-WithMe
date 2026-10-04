@@ -18,20 +18,20 @@ export default function Logo({
   }
   const ts = textSizes[textSize]
 
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <div
+    <div className="flex items-center gap-2.5 flex-shrink-0 cursor-pointer select-none">
+      <img
+        src={logoImg}
+        alt="Match&Map with me Logo"
+        width={size}
+        height={size}
+        className="rounded-lg object-contain bg-[#f0ede6] shadow-sm flex-shrink-0"
         style={{
           width: size,
           height: size,
-          flexShrink: 0,
-          borderRadius: 8,
-          backgroundImage: `url(${logoImg})`,
-          backgroundSize: "contain",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: "#f0ede6",
+          minWidth: size,
+          minHeight: size,
         }}
+        loading="eager"
       />
       {showText && (
         <div>

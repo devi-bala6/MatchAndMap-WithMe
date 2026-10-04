@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { View, User } from "../types"
 import Avatar from "./Avatar"
+import Logo from "./Logo"
 import EcoScoreModal from "./EcoScoreModal"
 import {
   Menu,
@@ -161,13 +162,18 @@ export default function TopBar({
           </button>
         )}
 
-        <div className="min-w-0">
-          <h1 className="font-display font-bold text-base sm:text-xl text-slate-100 truncate">
-            {info.title}
-          </h1>
-          <p className="font-mono text-[10px] sm:text-xs text-slate-400 truncate hidden sm:block">
-            {info.subtitle}
-          </p>
+        <div className="flex items-center gap-2.5">
+          <button onClick={() => onNav("dashboard")} className="flex-shrink-0 hover:opacity-85 transition-opacity" title="Back to Dashboard">
+            <Logo size={32} showText={false} />
+          </button>
+          <div className="min-w-0">
+            <h1 className="font-display font-bold text-base sm:text-xl text-slate-100 truncate">
+              {info.title}
+            </h1>
+            <p className="font-mono text-[10px] sm:text-xs text-slate-400 truncate hidden sm:block">
+              {info.subtitle}
+            </p>
+          </div>
         </div>
       </div>
 
