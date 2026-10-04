@@ -1,6 +1,7 @@
 import { useState } from "react"
 import type { View } from "../types"
 import { apiRequest } from "../lib/api"
+import Logo from "../components/Logo"
 
 interface AuthProps {
   mode: "login" | "register"
@@ -392,24 +393,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
             onClick={() => onNav("landing")}
             className="flex items-center gap-3"
           >
-            <div
-              className="flex items-center justify-center font-display font-black text-lg"
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 8,
-                background: "linear-gradient(135deg, #166534, #22c55e)",
-                color: "#080d1a",
-              }}
-            >
-              MM
-            </div>
-            <span
-              className="font-display font-bold"
-              style={{ color: "#e2e8f0" }}
-            >
-              Match&Map with me
-            </span>
+            <Logo size={42} showText={true} textSize="md" />
           </button>
         </div>
 
@@ -475,8 +459,15 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       </div>
 
       {/* Right panel - form */}
-      <div className="flex-1 flex items-center justify-center px-8 py-12">
+      <div className="flex-1 flex items-center justify-center px-6 sm:px-8 py-10 sm:py-12">
         <div style={{ width: "100%", maxWidth: 420 }}>
+          {/* Mobile logo header */}
+          <div className="lg:hidden mb-6 flex justify-center">
+            <button onClick={() => onNav("landing")}>
+              <Logo size={42} showText={true} textSize="md" />
+            </button>
+          </div>
+
           <div className="mb-8">
             <h1
               className="font-display font-bold text-3xl mb-2"
