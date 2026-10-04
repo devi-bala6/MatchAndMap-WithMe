@@ -1,0 +1,40 @@
+flowchart LR
+    %% Medium Detail Data Flow Diagram
+    
+    User([User])
+    Admin([Admin])
+    
+    subgraph Processes ["Core System Processes"]
+        P1(1. Auth & Profiles)
+        P2(2. Trip & Matching Engine)
+        P3(3. Chat & Reviews)
+        P4(4. Safety & SOS)
+    end
+    style Processes fill:#E3F2FD,stroke:#1976D2
+    
+    DB[(Database Store)]
+    Weather([Weather API])
+    SMS([SMS Gateway])
+    
+    User <-->|Credentials / Profile| P1
+    User <-->|Trip Data / Match Req| P2
+    User <-->|Messages / Ratings| P3
+    User -->|Emergency Signal| P4
+    
+    P1 <--> DB
+    P2 <--> DB
+    P3 <--> DB
+    P4 --> DB
+    
+    P2 <-->|Weather Query| Weather
+    P4 -->|Alert Dispatch| SMS
+    
+    Admin -->|Moderation| P1
+    Admin -->|Content Review| P2
+
+    subgraph Legend ["Legend"]
+        direction LR
+        classDef processes fill:#E3F2FD,stroke:#1976D2
+        note "Processes = light blue"
+    end
+    style Legend fill:#F5F5F5,stroke:#9E9E9E

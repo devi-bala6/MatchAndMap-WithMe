@@ -1,0 +1,10 @@
+{
+  "description": "Connect with like-minded travelers to find companions for your next adventure, share live locations, and manage trips securely.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

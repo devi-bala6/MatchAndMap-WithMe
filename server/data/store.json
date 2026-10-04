@@ -1,0 +1,92 @@
+{
+  "trips": [
+    {
+      "id": "trip-101",
+      "destination": "Kyoto, Japan",
+      "title": "Cultural Spring Walk",
+      "date": "2026-04-18",
+      "budget": 780,
+      "travelers": 2,
+      "vibe": "Culture & Food"
+    },
+    {
+      "id": "trip-102",
+      "destination": "Banff, Canada",
+      "title": "Alpine Weekend",
+      "date": "2026-06-04",
+      "budget": 940,
+      "travelers": 3,
+      "vibe": "Nature & Hiking"
+    },
+    {
+      "id": "trip-1789219572307",
+      "destination": "Lisbon, Portugal",
+      "title": "Coastal Food Story",
+      "date": "2026-07-10",
+      "budget": 620,
+      "travelers": 2,
+      "vibe": "Food and Culture"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "buddy-301",
+      "name": "Mina",
+      "city": "Kyoto",
+      "compatibility": 96,
+      "interests": [
+        "Food Tours",
+        "Museums",
+        "Quiet Cafés"
+      ]
+    },
+    {
+      "id": "buddy-302",
+      "name": "Theo",
+      "city": "Banff",
+      "compatibility": 91,
+      "interests": [
+        "Hiking",
+        "Photography",
+        "Nature"
+      ]
+    }
+  ],
+  "profile": {
+    "id": "user-42",
+    "name": "Avery Carter",
+    "location": "Brooklyn, NY",
+    "travelStyle": "Local food, museums, easy pace",
+    "bio": "Looking for thoughtful travel companions who enjoy meaningful city walks and small-group experiences."
+  },
+  "messages": [
+    {
+      "id": "chat-1",
+      "sender": "Mina",
+      "text": "I found a food map for the old town.",
+      "date": "09:30"
+    },
+    {
+      "id": "chat-2",
+      "sender": "You",
+      "text": "That sounds perfect — let’s plan around lunch.",
+      "date": "09:42"
+    },
+    {
+      "id": "m-1789728560133",
+      "roomId": "cr1",
+      "senderId": "u1",
+      "senderName": "Aryan Mehta",
+      "senderAvatar": "",
+      "content": "hii where are you",
+      "timestamp": "04:19 PM"
+    }
+  ],
+  "summary": {
+    "activeUsers": 127,
+    "trips": 34,
+    "matches": 482,
+    "riskAlerts": 3
+  },
+  "reviews": []
+}

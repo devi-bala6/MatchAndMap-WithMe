@@ -1,0 +1,33 @@
+stateDiagram-v2
+    %% Medium Detail Activity Workflow
+
+    [*] --> LandingPage
+    
+    state "Authentication" as Auth {
+        LandingPage --> Login
+        Login --> Dashboard
+    }
+
+    state "Trip Management" as TripFlow {
+        Dashboard --> CreateTrip
+        Dashboard --> BrowseTrips
+        BrowseTrips --> RequestToJoin
+        CreateTrip --> CalculateEcoScore
+    }
+
+    state "Social & Safety" as SocialFlow {
+        Dashboard --> ChatRoom
+        Dashboard --> EmergencySOS
+        EmergencySOS --> DispatchAlert
+    }
+    
+    CalculateEcoScore --> PublishTrip
+    RequestToJoin --> HostApproves
+    HostApproves --> ChatRoom
+    
+    PublishTrip --> Dashboard
+    DispatchAlert --> Dashboard
+    ChatRoom --> Dashboard
+    
+    Dashboard --> Logout
+    Logout --> [*]

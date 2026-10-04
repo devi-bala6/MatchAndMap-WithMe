@@ -1,0 +1,77 @@
+classDiagram
+    direction LR
+
+    %% Packages grouping related entities
+    package UserPackage {
+        class User {
+            +String id
+            +String name
+            +String email
+            +String role
+            +Number ecoScore
+        }
+        class Beneficiary {
+            +String name
+            +String phone
+        }
+    }
+
+    package TripPackage {
+        class Trip {
+            +String id
+            +String destination
+            +String startDate
+            +String budget
+            +Number maxCompanions
+            +Boolean ecoFriendly
+        }
+        class Itinerary {
+            +Number totalDays
+            +Number totalBudget
+        }
+    }
+
+    package ReviewPackage {
+        class Review {
+            +String id
+            +Number rating
+            +String comment
+        }
+    }
+
+    package ChatPackage {
+        class ChatRoom {
+            +String id
+            +String name
+            +List~String~ participants
+        }
+    }
+
+    %% Relationships with explicit cardinalities
+    User "1" *-- "1" Beneficiary : has contact
+    User "1" -- "0..*" Trip : hosts / joins
+    Trip "1" *-- "0..1" Itinerary : scheduled by
+    User "1" -- "0..*" Review : writes
+    Trip "1" -- "0..*" Review : receives
+    User "2..*" -- "0..*" ChatRoom : participant
+
+    %% Styling for visual distinction
+    class User fill:#E3F2FD,stroke:#1976D2
+    class Beneficiary fill:#BBDEFB,stroke:#1976D2
+    class Trip fill:#C8E6C9,stroke:#388E3C
+    class Itinerary fill:#A5D6A7,stroke:#388E3C
+    class Review fill:#FFF9C4,stroke:#FBC02D
+    class ChatRoom fill:#FFECB3,stroke:#F57F17
+
+    %% Legend for colors
+    subgraph Legend ["Legend"]
+        direction LR
+        classDef blue fill:#E3F2FD,stroke:#1976D2
+        classDef green fill:#C8E6C9,stroke:#388E3C
+        classDef yellow fill:#FFF9C4,stroke:#FBC02D
+        classDef orange fill:#FFECB3,stroke:#F57F17
+        note "User/Beneficiary = blue" 
+        note "Trip/Itinerary = green" 
+        note "Review = yellow" 
+        note "ChatRoom = orange" 
+    end

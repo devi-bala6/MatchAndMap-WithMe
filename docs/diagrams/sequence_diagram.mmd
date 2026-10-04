@@ -1,0 +1,26 @@
+sequenceDiagram
+    autonumber
+    %% Medium Detail Sequence Diagram
+
+    actor User
+    participant Frontend
+    participant BackendAPI
+    participant Database
+    participant External
+
+    User->>Frontend: Login
+    Frontend->>BackendAPI: POST /auth
+    BackendAPI->>Database: Verify
+    Database-->>BackendAPI: Valid
+    BackendAPI-->>Frontend: JWT Token
+
+    User->>Frontend: Create Trip
+    Frontend->>BackendAPI: POST /trips
+    BackendAPI->>Database: Save
+    BackendAPI-->>Frontend: Success
+
+    User->>Frontend: Trigger SOS
+    Frontend->>BackendAPI: POST /sos
+    BackendAPI->>External: Dispatch SMS Alert
+    External-->>BackendAPI: Sent
+    BackendAPI-->>Frontend: SOS Active

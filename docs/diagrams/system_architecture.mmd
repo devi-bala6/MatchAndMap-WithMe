@@ -1,0 +1,52 @@
+flowchart LR
+    %% Medium Detail System Architecture
+
+    subgraph Client ["Client Interface (React)"]
+        UI[Frontend UI Components]
+        State[Local Storage / JWT State]
+    end
+    style Client fill:#E3F2FD,stroke:#1976D2
+
+    subgraph Backend ["Backend API (Express)"]
+        Auth[Auth & User Module]
+        Trips[Trips & Itinerary Module]
+        Social[Chat & Matching Module]
+        Safety[Emergency SOS Module]
+    end
+    style Backend fill:#C8E6C9,stroke:#388E3C
+
+    subgraph Data ["Persistence Layer"]
+        DB[(Application Database)]
+    end
+    style Data fill:#FFF9C4,stroke:#FBC02D
+
+    subgraph External ["External Services"]
+        Weather[Weather/AQI API]
+        SMS[SMS Gateway]
+    end
+    style External fill:#FFECB3,stroke:#F57F17
+
+    %% Key Data Flows
+    UI -->|API Requests| Backend
+    Backend -->|Database Queries| DB
+    
+    Trips -->|Fetch Forecast| Weather
+    Safety -->|Dispatch Alert| SMS
+    
+    Auth --> DB
+    Trips --> DB
+    Social --> DB
+    Safety --> DB
+
+    subgraph Legend ["Legend"]
+        direction LR
+        classDef client fill:#E3F2FD,stroke:#1976D2
+        classDef backend fill:#C8E6C9,stroke:#388E3C
+        classDef data fill:#FFF9C4,stroke:#FBC02D
+        classDef external fill:#FFECB3,stroke:#F57F17
+        note "Client = light blue"
+        note "Backend = light green"
+        note "Data = light yellow"
+        note "External = light orange"
+    end
+    style Legend fill:#F5F5F5,stroke:#9E9E9E
