@@ -1,4 +1,4 @@
-import logoImg from "../imports/WhatsApp_Image_2026-09-11_at_12.10.49_PM.jpeg"
+import { LOGO_BASE64 } from "../assets/logoData"
 
 interface LogoProps {
   size?: number
@@ -21,7 +21,7 @@ export default function Logo({
   return (
     <div className="flex items-center gap-2.5 flex-shrink-0 cursor-pointer select-none">
       <img
-        src={logoImg}
+        src={LOGO_BASE64}
         alt="Match&Map with me Logo"
         width={size}
         height={size}

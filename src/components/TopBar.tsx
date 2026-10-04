@@ -163,7 +163,7 @@ export default function TopBar({
         )}
 
         <div className="flex items-center gap-2.5">
-          <button onClick={() => onNav("dashboard")} className="flex-shrink-0 hover:opacity-85 transition-opacity" title="Back to Dashboard">
+          <button onClick={() => onNav("dashboard")} className="flex-shrink-0 md:hidden hover:opacity-85 transition-opacity" title="Back to Dashboard">
             <Logo size={32} showText={false} />
           </button>
           <div className="min-w-0">
