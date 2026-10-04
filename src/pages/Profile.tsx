@@ -117,13 +117,16 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
     )
   }
 
-  function toggleInterest(item: string, field: "interests" | "hobbies") {
-    setProfile((p) => ({
-      ...p,
-      [field]: (p[field] as string[]).includes(item)
-        ? (p[field] as string[]).filter((x) => x !== item)
-        : [...p[field] as string[], item],
-    }))
+  function toggleInterest(item: string, field: "interests" | "hobbies" | "languages") {
+    setProfile((p) => {
+      const list = Array.isArray(p[field]) ? (p[field] as string[]) : []
+      return {
+        ...p,
+        [field]: list.includes(item)
+          ? list.filter((x) => x !== item)
+          : [...list, item],
+      }
+    })
   }
 
   async function handleSave() {
@@ -147,14 +150,18 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           updated.beneficiary = { ...res.beneficiary }
         }
       } else if (tab === "preferences") {
-        await apiRequest("/profile/preferences", {
+        const res = await apiRequest<any>("/profile", {
           method: "PATCH",
           body: JSON.stringify({
+            languages: profile.languages,
             locationSharing,
             emergencyAlerts,
             shareWithBeneficiary,
           }),
-        })
+        }).catch(() => null)
+        if (res && typeof res === "object") {
+          updated = { ...updated, ...res }
+        }
       }
 
       setProfile(updated)
@@ -584,6 +591,61 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                 ))}
               </div>
             </div>
+
+            <div>
+              <label
+                className="block font-display font-medium text-sm mb-2"
+                style={{ color: "#94a3b8" }}
+              >
+                Languages Spoken
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "English",
+                  "Hindi",
+                  "Tamil",
+                  "Telugu",
+                  "Kannada",
+                  "Malayalam",
+                  "Bengali",
+                  "Marathi",
+                  "Gujarati",
+                  "Punjabi",
+                  "Spanish",
+                  "French",
+                  "German",
+                  "Japanese",
+                ].map((lang) => {
+                  const isSelected = (profile.languages || []).includes(lang)
+                  return (
+                    <button
+                      key={lang}
+                      type="button"
+                      onClick={() => toggleInterest(lang, "languages")}
+                      className="badge transition-all cursor-pointer select-none flex items-center gap-1.5 py-1 px-2.5 text-xs font-medium"
+                      style={
+                        isSelected
+                          ? {
+                              background: "rgba(34,197,94,0.2)",
+                              color: "#4ade80",
+                              border: "1px solid rgba(34,197,94,0.4)",
+                            }
+                          : {
+                              background: "rgba(100,116,139,0.1)",
+                              color: "#64748b",
+                              border: "1px solid #1a2845",
+                            }
+                      }
+                    >
+                      <span>{lang}</span>
+                      <span style={{ fontSize: 10, fontWeight: 700 }}>
+                        {isSelected ? "✓" : "+"}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
 
           <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
@@ -1004,39 +1066,56 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               className="block font-display font-medium text-sm mb-2"
               style={{ color: "#94a3b8" }}
             >
-              Preferred Languages
+              Preferred Languages (Click to toggle)
             </label>
             <div className="flex flex-wrap gap-2">
               {[
                 "English",
                 "Hindi",
+                "Tamil",
+                "Telugu",
+                "Kannada",
+                "Malayalam",
+                "Bengali",
+                "Marathi",
+                "Gujarati",
+                "Punjabi",
                 "Spanish",
                 "French",
                 "German",
                 "Japanese",
                 "Mandarin",
                 "Portuguese",
-              ].map((lang) => (
-                <button
-                  key={lang}
-                  className="badge transition-all"
-                  style={
-                    profile.languages.includes(lang)
-                      ? {
-                          background: "rgba(14,165,233,0.2)",
-                          color: "#38bdf8",
-                          border: "1px solid rgba(14,165,233,0.4)",
-                        }
-                      : {
-                          background: "rgba(100,116,139,0.1)",
-                          color: "#64748b",
-                          border: "1px solid #1a2845",
-                        }
-                  }
-                >
-                  {lang}
-                </button>
-              ))}
+              ].map((lang) => {
+                const isSelected = (profile.languages || []).includes(lang)
+                return (
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => toggleInterest(lang, "languages")}
+                    className="badge transition-all cursor-pointer select-none flex items-center gap-1.5 py-1.5 px-3 font-semibold text-xs"
+                    style={
+                      isSelected
+                        ? {
+                            background: "rgba(14,165,233,0.25)",
+                            color: "#38bdf8",
+                            border: "1px solid rgba(14,165,233,0.5)",
+                            boxShadow: "0 0 10px rgba(14,165,233,0.2)",
+                          }
+                        : {
+                            background: "rgba(100,116,139,0.1)",
+                            color: "#64748b",
+                            border: "1px solid #1a2845",
+                          }
+                    }
+                  >
+                    <span>{lang}</span>
+                    <span style={{ fontSize: 11, fontWeight: 700 }}>
+                      {isSelected ? "✓" : "+"}
+                    </span>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
