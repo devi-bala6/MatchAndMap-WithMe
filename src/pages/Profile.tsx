@@ -239,16 +239,16 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
   ] as const
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto space-y-6">
+    <div className="p-3 sm:p-6 lg:p-8 max-w-5xl mx-auto space-y-5 sm:space-y-6 w-full max-w-full overflow-x-hidden">
       <div>
         <p
-          className="font-display font-bold text-sm uppercase mb-1 sm:mb-2"
+          className="font-display font-bold text-xs sm:text-sm uppercase mb-1 sm:mb-2"
           style={{ color: "#0ea5e9" }}
         >
           MY ACCOUNT
         </p>
         <h2
-          className="font-display font-black text-2xl sm:text-3xl"
+          className="font-display font-black text-xl sm:text-3xl"
           style={{ color: "#e2e8f0" }}
         >
           Profile & Settings
@@ -967,7 +967,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           <button
             type="button"
             onClick={handlePasswordUpdate}
-            className="btn-primary"
+            className="btn-primary w-full sm:w-auto"
           >
             Update Password
           </button>
@@ -985,7 +985,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             >
               Permanent account removal
             </p>
-            <button className="btn-danger text-sm px-4 py-2">
+            <button className="btn-danger text-sm px-4 py-2 w-full sm:w-auto">
               Delete Account
             </button>
           </div>
@@ -994,7 +994,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
 
       {/* PREFERENCES TAB */}
       {tab === "preferences" && (
-        <div className="max-w-lg flex flex-col gap-5">
+        <div className="w-full max-w-lg flex flex-col gap-5">
           {[
             {
               label: "Live Location Sharing",
@@ -1020,7 +1020,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           ].map((item) => (
             <div
               key={item.label}
-              className="p-4 rounded-xl flex items-center gap-4"
+              className="p-3.5 sm:p-4 rounded-xl flex items-center gap-3 sm:gap-4"
               style={{ background: "#0d1525", border: "1px solid #1a2845" }}
             >
               <div className="flex-1">
@@ -1030,7 +1030,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                 >
                   {item.label}
                 </p>
-                <p className="text-xs" style={{ color: "#64748b" }}>
+                <p className="text-xs" style={{ color: "#94a3b8" }}>
                   {item.desc}
                 </p>
               </div>
@@ -1119,7 +1119,7 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             </div>
           </div>
 
-          <button onClick={handleSave} className="btn-primary mt-2">
+          <button onClick={handleSave} className="btn-primary mt-2 w-full sm:w-auto">
             {saved ? "✓ Saved!" : "Save Preferences"}
           </button>
         </div>

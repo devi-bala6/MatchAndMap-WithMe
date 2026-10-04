@@ -331,7 +331,7 @@ export default function App() {
             onToggleMobileMenu={() => setMobileMenuOpen((open) => !open)}
           />
 
-          <main className="flex-1 overflow-y-auto flex flex-col min-h-0 bg-transparent pb-16 md:pb-0">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col min-h-0 bg-transparent pb-24 md:pb-6 w-full">
             {view === "dashboard" && (
               <Dashboard user={user} onNav={handleNav} />
             )}
