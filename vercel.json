@@ -1,29 +1,8 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "travel-companion-frontend": {
-      "root": ".",
-      "framework": "vite",
-      "buildCommand": "npm run build"
-    },
-    "travel-companion-backend": {
-      "root": "backend",
-      "framework": "express",
-      "buildCommand": "npm install"
-    }
-  },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": {
-        "service": "travel-companion-backend"
-      }
-    },
-    {
       "source": "/(.*)",
-      "destination": {
-        "service": "travel-companion-frontend"
-      }
+      "destination": "/index.html"
     }
   ]
 }
