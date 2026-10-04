@@ -84,38 +84,13 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
         },
       )
       localStorage.setItem("travel_companion_token", result.token)
+      localStorage.setItem("travel_companion_user", JSON.stringify(result.user))
       if (isLogin) onLogin(result.user)
       else onRegister(result.user)
     } catch (requestError: any) {
-      console.warn("Backend request notice, activating resilient session:", requestError)
-      
-      const mockFallbackUser = {
-        id: `u_${Date.now()}`,
-        name: cleanName || cleanEmail.split("@")[0].replace(/[^a-zA-Z0-9]/g, ' '),
-        email: cleanEmail,
-        role: cleanEmail.includes("admin") ? "admin" : "user",
-        status: "active",
-        verified: true,
-        tripsCount: 1,
-        rating: 5.0,
-        reviewCount: 3,
-        joinedDate: new Date().toLocaleDateString("en-US", {
-          month: "short",
-          year: "numeric",
-        }),
-        bio: "Adventure enthusiast & travel explorer.",
-        interests: ["Travel", "Photography", "Road Trips", "Food & Dining"],
-        languages: ["English", "Hindi"],
-        travelStyle: "Explorer",
-        budget: "mid-range",
-        ecoScore: 78,
-      }
-      localStorage.setItem(
-        "travel_companion_token",
-        `mock_token_${Date.now()}`,
-      )
-      if (isLogin) onLogin(mockFallbackUser)
-      else onRegister(mockFallbackUser)
+      console.error("Authentication error:", requestError)
+      const msg = requestError?.message || "Authentication failed. Please check your credentials."
+      setError(msg)
     } finally {
       setLoading(false)
     }
@@ -631,41 +606,6 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
               ) : (
                 "Create Account"
               )}
-            </button>
-
-            {/* Quick Demo Access Button */}
-            <button
-              type="button"
-              onClick={() => {
-                const demoUser = {
-                  id: "demo_traveler_01",
-                  name: "Devi Bala",
-                  email: "devibala@travel.app",
-                  role: "user",
-                  status: "active",
-                  verified: true,
-                  tripsCount: 4,
-                  rating: 4.9,
-                  reviewCount: 12,
-                  joinedDate: "Jan 2025",
-                  bio: "Avid solo traveler & culture enthusiast. Exploring India & South East Asia.",
-                  interests: ["Mountain Treks", "Heritage Walks", "Photography", "Street Food"],
-                  languages: ["English", "Tamil", "Hindi"],
-                  travelStyle: "Explorer",
-                  budget: "mid-range",
-                  ecoScore: 84,
-                }
-                localStorage.setItem("travel_companion_token", "demo_jwt_token_2026")
-                onLogin(demoUser)
-              }}
-              className="w-full py-2.5 px-4 rounded-xl font-display font-medium text-sm flex items-center justify-center gap-2 transition-all mt-3 border hover:border-emerald-500/40"
-              style={{
-                background: "rgba(14, 165, 233, 0.08)",
-                borderColor: "rgba(14, 165, 233, 0.25)",
-                color: "#38bdf8",
-              }}
-            >
-              <span>⚡</span> Instant Demo Login (1-Click)
             </button>
 
             {!isLogin && (
