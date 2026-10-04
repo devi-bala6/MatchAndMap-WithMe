@@ -18,6 +18,7 @@ export default function Logo({
   }
   const ts = textSizes[textSize]
 
+  return (
     <div className="flex items-center gap-2.5 flex-shrink-0 cursor-pointer select-none">
       <img
         src={logoImg}
