@@ -24,6 +24,8 @@ export interface User {
   aadhaarMasked?: string
   joinedDate: string
   role: "user" | "admin"
+  status?: "active" | "banned"
+  _id?: string
   beneficiary: Beneficiary
   phone: string
   ecoScore: number
@@ -39,6 +41,7 @@ export interface Beneficiary {
 
 export interface Trip {
   id: string
+  _id?: string
   userId: string
   userName: string
   userAvatar: string

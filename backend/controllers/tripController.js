@@ -163,15 +163,20 @@ export async function updateTrip(req, res) {
 
 export async function deleteTrip(req, res) {
   try {
+    const isAdmin = req.user.role === "admin"
+    const query = isAdmin ? { _id: req.params.id } : { _id: req.params.id, owner: req.user._id }
+
     if (isDbConnected()) {
-      const trip = await Trip.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
+      const trip = await Trip.findOneAndDelete(query)
       if (!trip) return res.status(404).json({ message: "Trip not found or not owned by you" })
       return res.status(204).end()
     }
     const idx = localTrips.findIndex((t) => t._id === req.params.id || t.id === req.params.id)
     if (idx >= 0) {
-      localTrips.splice(idx, 1)
-      return res.status(204).end()
+      if (isAdmin || localTrips[idx].owner === req.user._id) {
+        localTrips.splice(idx, 1)
+        return res.status(204).end()
+      }
     }
     return res.status(404).json({ message: "Trip not found" })
   } catch (error) {
