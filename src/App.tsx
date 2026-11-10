@@ -215,7 +215,11 @@ export default function App() {
     try {
       localStorage.setItem("travel_companion_user", JSON.stringify(finalUser))
     } catch {}
-    setView(pendingDestination !== null ? "browse-trips" : "dashboard")
+    if (finalUser.role === "admin") {
+      setView("admin")
+    } else {
+      setView(pendingDestination !== null ? "browse-trips" : "dashboard")
+    }
   }
 
   function handleRegister(authenticatedUser: User) {
@@ -248,7 +252,7 @@ export default function App() {
         month: "short",
         year: "numeric",
       }),
-      role: "user",
+      role: authenticatedUser.role || "user",
       phone: authenticatedUser.phone || "",
       ecoScore: 85,
       beneficiary: authenticatedUser.beneficiary || {
@@ -264,7 +268,11 @@ export default function App() {
     try {
       localStorage.setItem("travel_companion_user", JSON.stringify(finalUser))
     } catch {}
-    setView(pendingDestination !== null ? "browse-trips" : "dashboard")
+    if (finalUser.role === "admin") {
+      setView("admin")
+    } else {
+      setView(pendingDestination !== null ? "browse-trips" : "dashboard")
+    }
   }
 
   function handleLogout() {

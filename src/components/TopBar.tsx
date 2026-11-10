@@ -186,6 +186,17 @@ export default function TopBar({
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        {user?.role === "admin" && (
+          <button
+            onClick={() => onNav("admin")}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-[11px] font-bold hover:bg-purple-500/25 transition-all cursor-pointer shadow-sm"
+            title="Open Admin Control Panel"
+          >
+            <span>🛡️</span>
+            <span className="hidden xs:inline">Admin Panel</span>
+          </button>
+        )}
+
         {/* SOS quick button */}
         <button
           onClick={() => onNav("sos")}

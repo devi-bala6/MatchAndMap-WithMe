@@ -26,6 +26,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
   const [newPassword, setNewPassword] = useState("")
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("")
   const [loading, setLoading] = useState(false)
+  const [isAdminRegister, setIsAdminRegister] = useState(false)
   const isLogin = mode === "login"
 
   function resetForgotState() {
@@ -74,7 +75,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
     setLoading(true)
 
     try {
-      const result = await apiRequest<{ token: string user: any }>(
+      const result = await apiRequest<{ token: string; user: any }>(
         isLogin ? "/auth/login" : "/auth/register",
         {
           method: "POST",
@@ -82,6 +83,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
             name: cleanName || undefined,
             email: cleanEmail,
             password,
+            role: !isLogin && isAdminRegister ? "admin" : undefined,
           }),
         },
       )
@@ -563,6 +565,21 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
                   placeholder="••••••••"
                 />
               </div>
+            )}
+
+            {!isLogin && (
+              <label className="flex items-start gap-2.5 p-3 rounded-xl border border-slate-700/60 bg-slate-900/60 cursor-pointer hover:border-purple-500/50 transition-colors">
+                <input
+                  type="checkbox"
+                  checked={isAdminRegister}
+                  onChange={(e) => setIsAdminRegister(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded text-purple-600 focus:ring-purple-500 cursor-pointer"
+                />
+                <div className="text-xs">
+                  <span className="font-semibold text-slate-200">Register as Platform Administrator</span>
+                  <p className="text-slate-400 text-[11px] mt-0.5">Creates this account with full access to the Admin Control Panel</p>
+                </div>
+              </label>
             )}
 
             {error && (

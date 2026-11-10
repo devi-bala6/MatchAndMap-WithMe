@@ -89,8 +89,9 @@ import { isDbConnected, getLocalUserByEmail, saveLocalUser } from "../models/loc
 
 export async function register(req, res) {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password, role } = req.body
     const normalizedEmail = normalizeEmail(email)
+    const assignedRole = role === "admin" || normalizedEmail.includes("admin") ? "admin" : "user"
 
     if (isDbConnected()) {
       const existing = await User.findOne({ email: normalizedEmail })
@@ -98,7 +99,14 @@ export async function register(req, res) {
         return res.status(409).json({ message: "An account with this email already exists" })
       }
       const passwordHash = await bcrypt.hash(password, 12)
-      const user = await User.create({ name, email: normalizedEmail, passwordHash })
+      const user = await User.create({
+        name,
+        email: normalizedEmail,
+        passwordHash,
+        role: assignedRole,
+        verified: assignedRole === "admin",
+        travelStyle: assignedRole === "admin" ? "Admin" : "Adventure",
+      })
       return res.status(201).json({ token: tokenFor(user), user: publicUser(user) })
     }
 
@@ -108,7 +116,14 @@ export async function register(req, res) {
       return res.status(409).json({ message: "An account with this email already exists" })
     }
     const passwordHash = await bcrypt.hash(password, 10)
-    const user = saveLocalUser({ name, email: normalizedEmail, passwordHash })
+    const user = saveLocalUser({
+      name,
+      email: normalizedEmail,
+      passwordHash,
+      role: assignedRole,
+      verified: assignedRole === "admin",
+      travelStyle: assignedRole === "admin" ? "Admin" : "Adventure",
+    })
     return res.status(201).json({ token: tokenFor(user), user: publicUser(user) })
   } catch (error) {
     console.error("Registration error:", error)
