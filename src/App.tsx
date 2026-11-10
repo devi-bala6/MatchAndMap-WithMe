@@ -215,11 +215,7 @@ export default function App() {
     try {
       localStorage.setItem("travel_companion_user", JSON.stringify(finalUser))
     } catch {}
-    if (finalUser.role === "admin") {
-      setView("admin")
-    } else {
-      setView(pendingDestination !== null ? "browse-trips" : "dashboard")
-    }
+    setView(pendingDestination !== null ? "browse-trips" : "dashboard")
   }
 
   function handleRegister(authenticatedUser: User) {

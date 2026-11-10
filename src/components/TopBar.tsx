@@ -187,18 +187,6 @@ export default function TopBar({
 
       <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
         {/* SOS quick button */}
-        {/* Admin Quick Jump Button */}
-        {user?.role === "admin" && (
-          <button
-            onClick={() => onNav("admin")}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono text-[11px] font-bold hover:bg-purple-500/25 transition-all cursor-pointer shadow-sm"
-            title="Open Admin Console"
-          >
-            <span>🛡️</span>
-            <span className="hidden xs:inline">Admin</span>
-          </button>
-        )}
-
         <button
           onClick={() => onNav("sos")}
           className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 font-mono text-xs font-bold hover:bg-red-500/20 transition-all shadow-sm"

@@ -633,14 +633,6 @@ export default function Landing({ onNav, onBrowseTrips }: LandingProps) {
           >
             Join Free
           </button>
-          <button
-            type="button"
-            onClick={() => onNav("login")}
-            className="text-purple-400 hover:text-purple-300 font-semibold transition-colors flex items-center gap-1"
-          >
-            <span>🛡️</span>
-            <span>Admin Portal</span>
-          </button>
         </div>
         <p className="text-slate-500">
           © 2026 Match &amp; Map with me. Empowering sustainable &amp; secure travel across India.

@@ -84,13 +84,7 @@ export default function Sidebar({
 
       {/* Nav list */}
       <nav className="flex-1 py-3 px-2 flex flex-col gap-0.5 overflow-y-auto">
-        {(user.role === "admin"
-          ? [
-              { view: "admin" as View, icon: "🛡️", label: "Admin Panel" },
-              ...navItems,
-            ]
-          : navItems
-        ).map(({ view, icon, label }) => {
+        {navItems.map(({ view, icon, label }) => {
           const isActive = current === view
           return (
             <button
