@@ -19,3 +19,14 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# Project documentation, presentations and generated PDFs
+*.pdf
+*.pptx
+generate-*.mjs
+generate_presentation.py
+presentation_slides.html
+project-summary-sheet.html
+sdg-goals.html
+system_diagrams.html
+test-cases.html
