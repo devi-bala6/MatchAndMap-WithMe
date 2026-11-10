@@ -139,7 +139,8 @@ export default function EcoScoreModal({
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Transparent sustainable travel evaluation and personal green roadmap.
+                Transparent sustainable travel evaluation and personal green
+                roadmap.
               </p>
             </div>
           </div>
@@ -182,8 +183,10 @@ export default function EcoScoreModal({
                 </div>
                 <p className="text-xs text-slate-300 mt-1 max-w-xs leading-relaxed">
                   Your travel choices prevent an estimated{" "}
-                  <strong className="text-emerald-300">{co2SavedKg} kg of CO₂</strong> per
-                  trip vs conventional air/luxury travel.
+                  <strong className="text-emerald-300">
+                    {co2SavedKg} kg of CO₂
+                  </strong>{" "}
+                  per trip vs conventional air/luxury travel.
                 </p>
               </div>
             </div>
@@ -215,7 +218,8 @@ export default function EcoScoreModal({
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Electric Indian Railways & buses produce 85% less CO₂ per km than short-haul flights.
+                  Electric Indian Railways & buses produce 85% less CO₂ per km
+                  than short-haul flights.
                 </p>
               </div>
 
@@ -230,7 +234,8 @@ export default function EcoScoreModal({
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Village stays, eco-lodges, and tents preserve local resources and support regional communities directly.
+                  Village stays, eco-lodges, and tents preserve local resources
+                  and support regional communities directly.
                 </p>
               </div>
 
@@ -245,7 +250,8 @@ export default function EcoScoreModal({
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Carrying reusable bottles, zero single-use plastics, and keeping hiking trails untouched.
+                  Carrying reusable bottles, zero single-use plastics, and
+                  keeping hiking trails untouched.
                 </p>
               </div>
 
@@ -260,7 +266,8 @@ export default function EcoScoreModal({
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
-                  Supporting verified Indian reforestation and community nature conservation programs.
+                  Supporting verified Indian reforestation and community nature
+                  conservation programs.
                 </p>
               </div>
             </div>
@@ -275,7 +282,8 @@ export default function EcoScoreModal({
                   Interactive Eco Checklist (Boost Your Score)
                 </h4>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Toggle your sustainable habits below to simulate and lock in your new Eco Score.
+                  Toggle your sustainable habits below to simulate and lock in
+                  your new Eco Score.
                 </p>
               </div>
             </div>
@@ -343,7 +351,9 @@ export default function EcoScoreModal({
                         >
                           {item.title}
                         </p>
-                        <p className="text-[11px] text-slate-400 mt-0.5">{item.desc}</p>
+                        <p className="text-[11px] text-slate-400 mt-0.5">
+                          {item.desc}
+                        </p>
                       </div>
                     </div>
                     <span

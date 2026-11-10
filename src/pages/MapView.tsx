@@ -37,10 +37,15 @@ export default function MapView({ user }: { user?: User | null }) {
           apiRequest<any[]>("/buddies").catch(() => []),
         ])
 
-        const tripsList = Array.isArray(apiTrips) && apiTrips.length > 0 ? apiTrips : readTrips()
+        const tripsList =
+          Array.isArray(apiTrips) && apiTrips.length > 0
+            ? apiTrips
+            : readTrips()
         setRealTrips(tripsList)
         if (tripsList.length > 0) {
-          setSelectedTripId((tripsList[0]._id || tripsList[0].id || "").toString())
+          setSelectedTripId(
+            (tripsList[0]._id || tripsList[0].id || "").toString(),
+          )
         }
 
         if (Array.isArray(apiBuddies)) {
@@ -56,11 +61,14 @@ export default function MapView({ user }: { user?: User | null }) {
   }, [])
 
   const currentSelectedTrip =
-    realTrips.find((t) => (t._id || t.id || "").toString() === selectedTripId) ||
+    realTrips.find(
+      (t) => (t._id || t.id || "").toString() === selectedTripId,
+    ) ||
     realTrips[0] ||
     null
 
-  const destinationName = currentSelectedTrip?.destination || "Indian Expedition"
+  const destinationName =
+    currentSelectedTrip?.destination || "Indian Expedition"
   const stateName = currentSelectedTrip?.state || "India"
   const tripGeo = getCoordsForDestination(destinationName, stateName)
 
@@ -78,7 +86,10 @@ export default function MapView({ user }: { user?: User | null }) {
     },
     ...buddies.slice(0, 3).map((b, idx) => {
       const u = b.user || b
-      const buddyGeo = getCoordsForDestination(u.city || u.state || "Hyderabad", u.state)
+      const buddyGeo = getCoordsForDestination(
+        u.city || u.state || "Hyderabad",
+        u.state,
+      )
       return {
         id: (u.id || u._id || `b_${idx}`).toString(),
         name: u.name || `Companion #${idx + 1}`,
@@ -106,7 +117,8 @@ export default function MapView({ user }: { user?: User | null }) {
             Live GPS Tracking & Companion Map
           </h2>
           <p className="text-sm text-slate-400 mt-1">
-            Real-time geospatial telemetry for your authentic trips and verified buddies across India.
+            Real-time geospatial telemetry for your authentic trips and verified
+            buddies across India.
           </p>
         </div>
       </div>
@@ -137,16 +149,22 @@ export default function MapView({ user }: { user?: User | null }) {
             <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
               {realTrips.length === 0 ? (
                 <div className="p-5 text-center bg-slate-950/60 rounded-2xl border border-slate-800 text-xs text-slate-400">
-                  <p className="font-semibold text-slate-300">No trips created yet</p>
+                  <p className="font-semibold text-slate-300">
+                    No trips created yet
+                  </p>
                   <p className="mt-1 text-[11px] text-slate-500">
-                    Create a trip from the My Trips page to track live coordinates here!
+                    Create a trip from the My Trips page to track live
+                    coordinates here!
                   </p>
                 </div>
               ) : (
                 realTrips.map((trip) => {
                   const tripIdStr = (trip._id || trip.id || "").toString()
                   const isSelected = selectedTripId === tripIdStr
-                  const geo = getCoordsForDestination(trip.destination, trip.state)
+                  const geo = getCoordsForDestination(
+                    trip.destination,
+                    trip.state,
+                  )
 
                   return (
                     <button
@@ -193,8 +211,10 @@ export default function MapView({ user }: { user?: User | null }) {
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Explore satellite views, GPS coordinates, or start live turn-by-turn navigation directly to{" "}
-              <strong className="text-slate-200">{destinationName}</strong> in Google Maps.
+              Explore satellite views, GPS coordinates, or start live
+              turn-by-turn navigation directly to{" "}
+              <strong className="text-slate-200">{destinationName}</strong> in
+              Google Maps.
             </p>
             <div className="flex flex-col gap-2">
               <button
@@ -210,7 +230,8 @@ export default function MapView({ user }: { user?: User | null }) {
                 rel="noreferrer"
                 className="w-full py-2.5 px-4 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/30 text-xs font-bold font-display flex items-center justify-center gap-2 transition-all"
               >
-                Get Live Turn-by-Turn Navigation <ExternalLink className="w-3.5 h-3.5" />
+                Get Live Turn-by-Turn Navigation{" "}
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -222,7 +243,8 @@ export default function MapView({ user }: { user?: User | null }) {
               Privacy & Battery Guard
             </div>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Broadcasts are scoped strictly to verified account buddies. High accuracy GPS utilizes battery-conscious adaptive throttling.
+              Broadcasts are scoped strictly to verified account buddies. High
+              accuracy GPS utilizes battery-conscious adaptive throttling.
             </p>
           </div>
         </div>
@@ -242,4 +264,3 @@ export default function MapView({ user }: { user?: User | null }) {
     </div>
   )
 }
-

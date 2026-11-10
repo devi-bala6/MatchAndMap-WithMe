@@ -2,6 +2,7 @@ import { useState, useEffect, Component } from "react"
 import type { ReactNode } from "react"
 import type { View, User } from "./types"
 import { apiRequest } from "./lib/api"
+import { useTheme } from "./lib/theme"
 
 const BG: Record<string, string> = {
   landing:
@@ -105,6 +106,7 @@ const APP_VIEWS: View[] = [
   "sos",
   "weather",
   "admin",
+  "diagrams",
 ]
 
 const ECO_BG = [
@@ -114,6 +116,7 @@ const ECO_BG = [
 ]
 
 export default function App() {
+  const [theme] = useTheme()
   const [view, setView] = useState<View>(() => {
     if (typeof window === "undefined") return "landing"
     try {
@@ -153,7 +156,10 @@ export default function App() {
             const normalized: User = { ...u, id: realId, _id: realId }
             setUser(normalized)
             try {
-              localStorage.setItem("travel_companion_user", JSON.stringify(normalized))
+              localStorage.setItem(
+                "travel_companion_user",
+                JSON.stringify(normalized),
+              )
             } catch {}
           }
         })
@@ -162,7 +168,11 @@ export default function App() {
   }, [])
 
   function handleLogin(authenticatedUser: User) {
-    const realId = (authenticatedUser.id || (authenticatedUser as any)._id || `u_${Date.now()}`).toString()
+    const realId = (
+      authenticatedUser.id ||
+      (authenticatedUser as any)._id ||
+      `u_${Date.now()}`
+    ).toString()
     const finalUser: User = {
       id: realId,
       _id: realId,
@@ -213,7 +223,11 @@ export default function App() {
   }
 
   function handleRegister(authenticatedUser: User) {
-    const realId = (authenticatedUser.id || (authenticatedUser as any)._id || `u_${Date.now()}`).toString()
+    const realId = (
+      authenticatedUser.id ||
+      (authenticatedUser as any)._id ||
+      `u_${Date.now()}`
+    ).toString()
     const finalUser: User = {
       id: realId,
       _id: realId,
@@ -389,13 +403,17 @@ export default function App() {
     )
   }
 
+  const isLight = theme === "light"
+
   return (
     <ErrorBoundary>
       <div
+        className={isLight ? "light" : "dark"}
         style={{
           minHeight: "100vh",
           position: "relative",
-          background: "#080d1a",
+          background: isLight ? "#f8fafc" : "#080d1a",
+          color: isLight ? "#0f172a" : "#e2e8f0",
         }}
       >
         {/* Per-view background — key forces remount + fade-in on every view change */}
@@ -410,14 +428,17 @@ export default function App() {
             backgroundRepeat: "no-repeat",
             animation: "bgFadeIn 0.7s ease forwards",
             zIndex: 0,
+            opacity: isLight ? 0.22 : 1,
           }}
         />
-        {/* Dark overlay */}
+        {/* Theme-aware background overlay */}
         <div
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(8,13,26,0.65)",
+            background: isLight
+              ? "rgba(248, 250, 252, 0.88)"
+              : "rgba(8, 13, 26, 0.65)",
             zIndex: 1,
             pointerEvents: "none",
           }}

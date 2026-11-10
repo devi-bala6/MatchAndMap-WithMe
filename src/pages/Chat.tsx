@@ -85,7 +85,11 @@ export default function Chat({ user }: ChatProps) {
           apiRequest<any[]>("/buddies").catch(() => []),
         ])
 
-        const currentUserId = (activeUser.id || (activeUser as any)._id || "").toString()
+        const currentUserId = (
+          activeUser.id ||
+          (activeUser as any)._id ||
+          ""
+        ).toString()
 
         if (Array.isArray(conns) && conns.length > 0) {
           const acceptedConns = conns.filter(
@@ -98,9 +102,15 @@ export default function Chat({ user }: ChatProps) {
                   ? (c.from._id || c.from.id || "").toString()
                   : (c.from || "").toString()
               const partnerId =
-                c.toUserId === currentUserId ? fromId : (c.toUserId || "").toString()
+                c.toUserId === currentUserId
+                  ? fromId
+                  : (c.toUserId || "").toString()
               const buddyMatch = Array.isArray(buddies)
-                ? buddies.find((b: any) => (b.user?.id || b.user?._id || "").toString() === partnerId)
+                ? buddies.find(
+                    (b: any) =>
+                      (b.user?.id || b.user?._id || "").toString() ===
+                      partnerId,
+                  )
                 : null
               const name =
                 buddyMatch?.user?.name ||
@@ -223,7 +233,11 @@ export default function Chat({ user }: ChatProps) {
       minute: "2-digit",
     })
 
-    const senderId = (activeUser.id || (activeUser as any)._id || "u1").toString()
+    const senderId = (
+      activeUser.id ||
+      (activeUser as any)._id ||
+      "u1"
+    ).toString()
     const senderName = activeUser.name || "You"
 
     const newMsg: ChatMessage = {
@@ -475,7 +489,10 @@ export default function Chat({ user }: ChatProps) {
                 .map((msg) => {
                   const isMe =
                     Boolean(activeUser?.id && msg.senderId === activeUser.id) ||
-                    Boolean((activeUser as any)?._id && msg.senderId === (activeUser as any)._id) ||
+                    Boolean(
+                      (activeUser as any)?._id &&
+                        msg.senderId === (activeUser as any)._id,
+                    ) ||
                     msg.senderName === activeUser?.name ||
                     msg.senderName === "You"
 

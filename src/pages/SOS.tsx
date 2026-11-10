@@ -53,10 +53,14 @@ export default function SOS({ user }: SOSProps) {
         if (Array.isArray(conns)) {
           const accepted = conns.filter((c) => c.status === "accepted")
           const companionList = accepted.map((c) => {
-            const isIncoming = (c.toUserId === user?.id || c.toUserId === (user as any)?._id)
-            const other = isIncoming && typeof c.from === "object" ? c.from : null
+            const isIncoming =
+              c.toUserId === user?.id || c.toUserId === (user as any)?._id
+            const other =
+              isIncoming && typeof c.from === "object" ? c.from : null
             return {
-              name: other?.name || (isIncoming ? "Connected Buddy" : "Travel Companion"),
+              name:
+                other?.name ||
+                (isIncoming ? "Connected Buddy" : "Travel Companion"),
               role: other?.travelStyle || "Companion",
               phone: other?.phone || "",
             }
@@ -484,9 +488,12 @@ export default function SOS({ user }: SOSProps) {
                 </div>
               ) : (
                 <div className="p-3.5 rounded-xl bg-slate-950/40 border border-dashed border-slate-800 text-center">
-                  <p className="text-xs text-slate-400 font-medium">No buddies connected yet</p>
+                  <p className="text-xs text-slate-400 font-medium">
+                    No buddies connected yet
+                  </p>
                   <p className="text-[11px] text-slate-600 mt-1 font-mono">
-                    Accept connection requests in Travel Buddies to link emergency telemetry
+                    Accept connection requests in Travel Buddies to link
+                    emergency telemetry
                   </p>
                 </div>
               )}

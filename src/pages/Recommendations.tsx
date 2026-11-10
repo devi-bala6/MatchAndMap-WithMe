@@ -185,16 +185,9 @@ function DestinationModal({
             state={rec.state}
             alt={rec.title}
             className="w-full h-full object-cover"
-            style={{ opacity: 0.75 }}
             fallback={rec.image}
           />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(8,13,26,0.95) 0%, transparent 50%)",
-            }}
-          />
+          <div className="absolute inset-0 card-photo-gradient pointer-events-none" />
           <div className="absolute bottom-4 left-4">
             <h2
               className="font-display font-black text-3xl"
@@ -523,7 +516,8 @@ export default function Recommendations({
               className="font-display text-sm font-medium"
               style={{ color: "#94a3b8" }}
             >
-              {(trendingPlacesByHashtag[activeHashtag] || []).length} more places
+              {(trendingPlacesByHashtag[activeHashtag] || []).length} more
+              places
             </span>
           </div>
           <div className="grid max-w-5xl grid-cols-1 sm:grid-cols-2 gap-6 mx-auto">

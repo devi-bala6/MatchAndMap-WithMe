@@ -134,9 +134,11 @@ export default function LiveTripMap({
 
   // Calculate center coordinate based on participants or myCoords
   const centerLat =
-    myCoords?.lat ?? (participants.length > 0 ? participants[0].latitude : 17.6868)
+    myCoords?.lat ??
+    (participants.length > 0 ? participants[0].latitude : 17.6868)
   const centerLng =
-    myCoords?.lng ?? (participants.length > 0 ? participants[0].longitude : 83.2185)
+    myCoords?.lng ??
+    (participants.length > 0 ? participants[0].longitude : 83.2185)
 
   return (
     <div className="rounded-2xl border border-slate-800 bg-slate-900/90 backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col">

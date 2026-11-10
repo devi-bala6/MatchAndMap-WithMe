@@ -1,6 +1,29 @@
 import bcrypt from "bcryptjs"
 import { User } from "../models/index.js"
-import { isDbConnected, getLocalUserById } from "../models/localStore.js"
+import { isDbConnected, getLocalUserById, localUsers } from "../models/localStore.js"
+
+export async function deleteAccount(req, res) {
+  try {
+    const userId = req.user._id || req.user.id
+    if (!userId) {
+      return res.status(400).json({ message: "User identity missing." })
+    }
+
+    if (isDbConnected()) {
+      await User.findByIdAndDelete(userId)
+    }
+
+    const email = (req.user.email || "").toLowerCase().trim()
+    if (email && localUsers.has(email)) {
+      localUsers.delete(email)
+    }
+
+    return res.json({ ok: true, message: "Account deleted successfully." })
+  } catch (error) {
+    console.error("deleteAccount error:", error)
+    return res.status(500).json({ message: error.message || "Failed to delete account." })
+  }
+}
 
 export async function updateProfile(req, res) {
   try {

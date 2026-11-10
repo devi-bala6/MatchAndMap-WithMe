@@ -3,6 +3,7 @@ import type { View } from "../types"
 import Logo from "../components/Logo"
 import Avatar from "../components/Avatar"
 import PlaceImage from "../components/PlaceImage"
+import ThemeToggle from "../components/ThemeToggle"
 
 interface LandingProps {
   onNav: (v: View) => void
@@ -147,6 +148,12 @@ export default function Landing({ onNav, onBrowseTrips }: LandingProps) {
           <Logo size={36} showText={true} textSize="md" />
         </div>
         <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle
+            compact={false}
+            showLabel={true}
+            className="hidden sm:inline-flex"
+          />
+          <ThemeToggle compact={true} className="sm:hidden" />
           <button
             onClick={() => onNav("login")}
             className="font-display font-medium text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-slate-300 hover:text-white"
@@ -218,7 +225,7 @@ export default function Landing({ onNav, onBrowseTrips }: LandingProps) {
           </h1>
 
           <p
-            className="text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto px-2"
+            className="hero-subtext text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-2xl mx-auto px-2"
             style={{
               color: "#fcd34d",
               textShadow:
@@ -300,7 +307,8 @@ export default function Landing({ onNav, onBrowseTrips }: LandingProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     fallback={d.img}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent dark:block hidden" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-transparent light:block dark:hidden" />
                   {d.eco && (
                     <div className="absolute top-3 right-3 badge badge-green text-[10px]">
                       🌿 Eco

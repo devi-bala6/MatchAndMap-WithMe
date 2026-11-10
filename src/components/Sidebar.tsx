@@ -2,6 +2,7 @@ import type { View, User } from "../types"
 import Logo from "./Logo"
 import Avatar from "./Avatar"
 import { X } from "lucide-react"
+import ThemeToggle from "./ThemeToggle"
 
 interface SidebarProps {
   current: View
@@ -137,8 +138,13 @@ export default function Sidebar({
         </div>
       </div>
 
-      {/* Logout */}
-      <div className="px-2 pb-3">
+      {/* Theme Toggle & Logout */}
+      <div className="px-2 pb-3 space-y-1">
+        <ThemeToggle
+          compact={false}
+          showLabel={true}
+          className="w-full justify-start px-3 py-2 text-xs"
+        />
         <button
           onClick={onLogout}
           className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-display font-medium w-full text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all"

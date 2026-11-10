@@ -4,10 +4,16 @@ import Avatar from "../components/Avatar"
 import { apiRequest } from "../lib/api"
 
 function mapReview(value: any): Review {
-  const fromObj = typeof value.fromUser === "object" && value.fromUser !== null ? value.fromUser : null
+  const fromObj =
+    typeof value.fromUser === "object" && value.fromUser !== null
+      ? value.fromUser
+      : null
   return {
     id: (value.id || value._id || "").toString(),
-    fromUserId: fromObj?._id?.toString() || value.fromUserId || (typeof value.fromUser === "string" ? value.fromUser : ""),
+    fromUserId:
+      fromObj?._id?.toString() ||
+      value.fromUserId ||
+      (typeof value.fromUser === "string" ? value.fromUser : ""),
     fromUserName: fromObj?.name || value.fromUserName || "Traveler",
     fromUserAvatar: fromObj?.avatar || value.fromUserAvatar || "",
     toUserId: (value.toUserId || "").toString(),
@@ -19,7 +25,11 @@ function mapReview(value: any): Review {
     tags: Array.isArray(value.tags) ? value.tags : [],
     comment: value.comment || "",
     date: value.createdAt
-      ? new Date(value.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+      ? new Date(value.createdAt).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
       : value.date || new Date().toLocaleDateString(),
   }
 }
@@ -76,7 +86,10 @@ function ReviewCard({ review }: { review: Review }) {
               </span>
               {review.toUserName && (
                 <span className="font-mono text-xs ml-2 text-slate-400">
-                  → for <span className="text-cyan-400 font-semibold">{review.toUserName}</span>
+                  → for{" "}
+                  <span className="text-cyan-400 font-semibold">
+                    {review.toUserName}
+                  </span>
                 </span>
               )}
             </div>

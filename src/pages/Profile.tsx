@@ -57,6 +57,28 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
     type: "success" | "error" | "idle"
     message: string
   }>({ type: "idle", message: "" })
+  const [deleting, setDeleting] = useState(false)
+
+  async function handleDeleteAccount() {
+    if (
+      !window.confirm(
+        "Are you sure you want to permanently delete your account? All your profile data, trips, and records will be deleted. This cannot be undone.",
+      )
+    ) {
+      return
+    }
+
+    try {
+      setDeleting(true)
+      await apiRequest("/profile", { method: "DELETE" })
+      localStorage.removeItem("travel_companion_token")
+      localStorage.removeItem("travel_companion_user")
+      window.location.href = "/"
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Failed to delete account.")
+      setDeleting(false)
+    }
+  }
 
   useEffect(() => {
     setProfile({ ...user })
@@ -117,9 +139,12 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
     )
   }
 
-  function toggleInterest(item: string, field: "interests" | "hobbies" | "languages") {
+  function toggleInterest(
+    item: string,
+    field: "interests" | "hobbies" | "languages",
+  ) {
     setProfile((p) => {
-      const list = Array.isArray(p[field]) ? (p[field] as string[]) : []
+      const list = Array.isArray(p[field]) ? p[field] as string[] : []
       return {
         ...p,
         [field]: list.includes(item)
@@ -290,7 +315,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           >
             {profile.name}
           </h3>
-          <p className="font-mono text-xs mb-3 break-words" style={{ color: "#94a3b8" }}>
+          <p
+            className="font-mono text-xs mb-3 break-words"
+            style={{ color: "#94a3b8" }}
+          >
             {profile.age} · {profile.nationality} · {profile.gender} · Joined{" "}
             {profile.joinedDate}
           </p>
@@ -309,7 +337,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               >
                 {profile.rating}
               </span>
-              <span className="font-mono text-[11px]" style={{ color: "#64748b" }}>
+              <span
+                className="font-mono text-[11px]"
+                style={{ color: "#64748b" }}
+              >
                 rating
               </span>
             </div>
@@ -326,7 +357,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               >
                 {profile.tripsCount}
               </span>
-              <span className="font-mono text-[11px]" style={{ color: "#64748b" }}>
+              <span
+                className="font-mono text-[11px]"
+                style={{ color: "#64748b" }}
+              >
                 trips
               </span>
             </div>
@@ -337,17 +371,28 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             >
               {profile.verified ? "✓ Verified" : "⏳ Pending"}
             </div>
-            <div className="badge badge-purple text-[11px] sm:text-xs">JWT Secured</div>
+            <div className="badge badge-purple text-[11px] sm:text-xs">
+              JWT Secured
+            </div>
           </div>
         </div>
         <div className="text-center sm:text-right w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-800/80 shrink-0">
-          <p className="font-mono text-[11px] mb-0.5" style={{ color: "#475569" }}>
+          <p
+            className="font-mono text-[11px] mb-0.5"
+            style={{ color: "#475569" }}
+          >
             MEMBER SINCE
           </p>
-          <p className="font-display font-bold text-sm sm:text-base" style={{ color: "#e2e8f0" }}>
+          <p
+            className="font-display font-bold text-sm sm:text-base"
+            style={{ color: "#e2e8f0" }}
+          >
             {profile.joinedDate}
           </p>
-          <p className="font-mono text-[11px] mt-0.5" style={{ color: "#0ea5e9" }}>
+          <p
+            className="font-mono text-[11px] mt-0.5"
+            style={{ color: "#0ea5e9" }}
+          >
             {profile.role.toUpperCase()}
           </p>
         </div>
@@ -663,7 +708,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                 >
                   Current Location
                 </p>
-                <p className="font-mono text-xs mt-0.5" style={{ color: "#64748b" }}>
+                <p
+                  className="font-mono text-xs mt-0.5"
+                  style={{ color: "#64748b" }}
+                >
                   {profile.city && profile.state
                     ? `${profile.city}, ${profile.state}`
                     : "Location not set yet"}
@@ -699,7 +747,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             )}
 
             <div className="flex justify-end pt-2">
-              <button onClick={handleSave} className="btn-primary px-8 w-full sm:w-auto">
+              <button
+                onClick={handleSave}
+                className="btn-primary px-8 w-full sm:w-auto"
+              >
                 {saved ? "✓ Saved!" : "Save Changes"}
               </button>
             </div>
@@ -725,7 +776,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
               >
                 Why this matters
               </p>
-              <p className="text-xs sm:text-sm leading-relaxed" style={{ color: "#94a3b8" }}>
+              <p
+                className="text-xs sm:text-sm leading-relaxed"
+                style={{ color: "#94a3b8" }}
+              >
                 In an emergency, TravelMate automatically shares your full trip
                 details, current location, and companion information with your
                 designated beneficiary. Keep this updated at all times.
@@ -825,7 +879,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             className="mt-6 p-4 sm:p-5 rounded-xl"
             style={{ background: "#0d1525", border: "1px solid #1a2845" }}
           >
-            <p className="font-mono text-xs mb-3 font-semibold" style={{ color: "#0ea5e9" }}>
+            <p
+              className="font-mono text-xs mb-3 font-semibold"
+              style={{ color: "#0ea5e9" }}
+            >
               WHAT GETS SHARED IN AN EMERGENCY
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
@@ -844,7 +901,12 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
                   className="flex items-center gap-2 text-xs sm:text-sm"
                   style={{ color: "#94a3b8" }}
                 >
-                  <span className="shrink-0 font-bold" style={{ color: "#4ade80" }}>✓</span>
+                  <span
+                    className="shrink-0 font-bold"
+                    style={{ color: "#4ade80" }}
+                  >
+                    ✓
+                  </span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -852,7 +914,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
           </div>
 
           <div className="flex justify-end mt-6">
-            <button onClick={handleSave} className="btn-primary px-8 w-full sm:w-auto">
+            <button
+              onClick={handleSave}
+              className="btn-primary px-8 w-full sm:w-auto"
+            >
               {saved ? "✓ Saved!" : "Update Beneficiary"}
             </button>
           </div>
@@ -985,8 +1050,13 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             >
               Permanent account removal
             </p>
-            <button className="btn-danger text-sm px-4 py-2 w-full sm:w-auto">
-              Delete Account
+            <button
+              type="button"
+              onClick={handleDeleteAccount}
+              disabled={deleting}
+              className="btn-danger text-sm px-4 py-2 w-full sm:w-auto"
+            >
+              {deleting ? "Deleting Account..." : "Delete Account"}
             </button>
           </div>
         </div>
@@ -1119,7 +1189,10 @@ export default function Profile({ user, onUpdateUser }: ProfileProps) {
             </div>
           </div>
 
-          <button onClick={handleSave} className="btn-primary mt-2 w-full sm:w-auto">
+          <button
+            onClick={handleSave}
+            className="btn-primary mt-2 w-full sm:w-auto"
+          >
             {saved ? "✓ Saved!" : "Save Preferences"}
           </button>
         </div>

@@ -71,9 +71,43 @@ app.use("/api/admin", requireAdmin, adminRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
+async function seedAdminIfMissing() {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      const existingAdmin = await User.findOne({ email: "admin@matchandmap.in" })
+      if (!existingAdmin) {
+        const passwordHash = await bcrypt.hash("AdminDemo123!", 10)
+        await User.create({
+          name: "System Administrator",
+          email: "admin@matchandmap.in",
+          passwordHash,
+          role: "admin",
+          status: "active",
+          verified: true,
+          travelStyle: "Admin",
+          budget: "mid-range",
+          interests: ["Platform Moderation", "Travel Safety", "Security"],
+          ecoScore: 100,
+          beneficiary: {
+            name: "Platform Support",
+            relation: "HQ",
+            phone: "+91 9876543210",
+            email: "support@matchandmap.in",
+            address: "HQ"
+          }
+        })
+        console.log("✓ Default admin account (admin@matchandmap.in) seeded in MongoDB")
+      }
+    }
+  } catch (err) {
+    console.warn("Notice during admin check:", err.message)
+  }
+}
+
 async function start() {
   try {
     await connectDatabase()
+    await seedAdminIfMissing()
   } catch (error) {
     console.warn(`Database initialization notice: ${error.message}`)
   }

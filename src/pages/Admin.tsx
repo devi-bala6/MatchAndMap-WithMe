@@ -32,13 +32,12 @@ export default function Admin() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [matches, liveTrips] = await Promise.all([
-          apiRequest<any[]>("/buddies").catch(() => []),
+        const [users, liveTrips] = await Promise.all([
+          apiRequest<User[]>("/admin/users").catch(() => []),
           apiRequest<Trip[]>("/trips").catch(() => []),
         ])
-        if (Array.isArray(matches) && matches.length > 0) {
-          const registered = matches.map((m: any) => m.user).filter(Boolean)
-          setUsersList(registered)
+        if (Array.isArray(users) && users.length > 0) {
+          setUsersList(users)
         }
         if (Array.isArray(liveTrips) && liveTrips.length > 0) {
           setAdminTrips(liveTrips)
@@ -47,6 +46,61 @@ export default function Admin() {
     }
     loadData()
   }, [])
+
+  async function handleVerifyUser(userId: string, currentVerified: boolean) {
+    try {
+      await apiRequest(`/admin/users/${userId}/verify`, {
+        method: "PATCH",
+        body: JSON.stringify({ verified: !currentVerified }),
+      })
+      setUsersList((prev) =>
+        prev.map((u) =>
+          (u.id || (u as any)._id) === userId
+            ? { ...u, verified: !currentVerified }
+            : u,
+        ),
+      )
+    } catch {
+      alert("Failed to update verification status.")
+    }
+  }
+
+  async function handleToggleBanUser(userId: string, currentStatus: string) {
+    const nextStatus = currentStatus === "banned" ? "active" : "banned"
+    try {
+      await apiRequest(`/admin/users/${userId}/status`, {
+        method: "PATCH",
+        body: JSON.stringify({ status: nextStatus }),
+      })
+      setUsersList((prev) =>
+        prev.map((u) =>
+          (u.id || (u as any)._id) === userId
+            ? { ...u, status: nextStatus as any }
+            : u,
+        ),
+      )
+    } catch {
+      alert("Failed to update user status.")
+    }
+  }
+
+  async function handleDeleteUser(userId: string, userName: string) {
+    if (
+      !window.confirm(
+        `Are you sure you want to permanently delete user "${userName}"? This cannot be undone.`,
+      )
+    ) {
+      return
+    }
+    try {
+      await apiRequest(`/admin/users/${userId}`, { method: "DELETE" })
+      setUsersList((prev) =>
+        prev.filter((u) => (u.id || (u as any)._id) !== userId),
+      )
+    } catch {
+      alert("Failed to delete user.")
+    }
+  }
 
   const filteredUsers = usersList.filter(
     (u) =>
@@ -640,28 +694,64 @@ export default function Admin() {
                       </span>
                     </td>
                     <td className="px-5 py-4">
-                      <div className="flex gap-2">
-                        {!u.verified && (
-                          <button
-                            className="px-2 py-1 rounded font-mono text-xs"
-                            style={{
-                              background: "rgba(34,197,94,0.1)",
-                              color: "#4ade80",
-                              border: "1px solid rgba(34,197,94,0.2)",
-                            }}
-                          >
-                            Verify
-                          </button>
-                        )}
+                      <div className="flex gap-2 items-center">
                         <button
+                          type="button"
+                          onClick={() =>
+                            handleVerifyUser(
+                              (u.id || (u as any)._id) as string,
+                              u.verified,
+                            )
+                          }
                           className="px-2 py-1 rounded font-mono text-xs"
                           style={{
-                            background: "rgba(239,68,68,0.1)",
-                            color: "#f87171",
+                            background: u.verified
+                              ? "rgba(100,116,139,0.15)"
+                              : "rgba(34,197,94,0.1)",
+                            color: u.verified ? "#94a3b8" : "#4ade80",
+                            border: "1px solid rgba(34,197,94,0.2)",
+                          }}
+                        >
+                          {u.verified ? "Unverify" : "Verify"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleToggleBanUser(
+                              (u.id || (u as any)._id) as string,
+                              u.status || "active",
+                            )
+                          }
+                          className="px-2 py-1 rounded font-mono text-xs"
+                          style={{
+                            background:
+                              u.status === "banned"
+                                ? "rgba(34,197,94,0.1)"
+                                : "rgba(239,68,68,0.1)",
+                            color:
+                              u.status === "banned" ? "#4ade80" : "#f87171",
                             border: "1px solid rgba(239,68,68,0.2)",
                           }}
                         >
-                          Ban
+                          {u.status === "banned" ? "Unban" : "Ban"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDeleteUser(
+                              (u.id || (u as any)._id) as string,
+                              u.name,
+                            )
+                          }
+                          className="px-2 py-1 rounded font-mono text-xs hover:opacity-80"
+                          style={{
+                            background: "rgba(220,38,38,0.15)",
+                            color: "#ef4444",
+                            border: "1px solid rgba(220,38,38,0.3)",
+                          }}
+                          title="Permanently Delete User"
+                        >
+                          Delete
                         </button>
                       </div>
                     </td>

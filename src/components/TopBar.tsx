@@ -3,6 +3,7 @@ import type { View, User } from "../types"
 import Avatar from "./Avatar"
 import Logo from "./Logo"
 import EcoScoreModal from "./EcoScoreModal"
+import ThemeToggle from "./ThemeToggle"
 import {
   Menu,
   ShieldAlert,
@@ -115,7 +116,10 @@ export default function TopBar({
         if (Array.isArray(connList)) {
           const pendingIncoming = connList.filter((c: any) => {
             const toId = (c.toUserId || "").toString()
-            return (toId === user.id || toId === (user as any)._id) && c.status === "pending"
+            return (
+              (toId === user.id || toId === (user as any)._id) &&
+              c.status === "pending"
+            )
           })
 
           for (const req of pendingIncoming) {
@@ -163,7 +167,11 @@ export default function TopBar({
         )}
 
         <div className="flex items-center gap-2.5">
-          <button onClick={() => onNav("dashboard")} className="flex-shrink-0 md:hidden hover:opacity-85 transition-opacity" title="Back to Dashboard">
+          <button
+            onClick={() => onNav("dashboard")}
+            className="flex-shrink-0 md:hidden hover:opacity-85 transition-opacity"
+            title="Back to Dashboard"
+          >
             <Logo size={32} showText={false} />
           </button>
           <div className="min-w-0">
@@ -204,6 +212,9 @@ export default function TopBar({
           onClose={() => setIsEcoModalOpen(false)}
           user={user}
         />
+
+        {/* Theme Toggle (Light / Dark Mode) */}
+        <ThemeToggle compact={true} />
 
         {/* Notifications */}
         <div className="relative">
@@ -262,16 +273,27 @@ export default function TopBar({
                       key={item.id}
                       onClick={() => {
                         const title = item.title.toLowerCase()
-                        if (title.includes("buddy") || title.includes("connection")) {
+                        if (
+                          title.includes("buddy") ||
+                          title.includes("connection")
+                        ) {
                           onNav("buddies")
-                        } else if (title.includes("trip") || title.includes("join")) {
+                        } else if (
+                          title.includes("trip") ||
+                          title.includes("join")
+                        ) {
                           onNav("my-trips")
                         } else if (title.includes("review")) {
                           onNav("reviews")
-                        } else if (title.includes("message") || title.includes("chat")) {
+                        } else if (
+                          title.includes("message") ||
+                          title.includes("chat")
+                        ) {
                           onNav("chat")
                         }
-                        apiRequest(`/notifications/${item.id}/read`, { method: "PUT" }).catch(() => {})
+                        apiRequest(`/notifications/${item.id}/read`, {
+                          method: "PUT",
+                        }).catch(() => {})
                         setIsNotificationsOpen(false)
                       }}
                       className="p-3.5 hover:bg-slate-900/60 transition-colors cursor-pointer"

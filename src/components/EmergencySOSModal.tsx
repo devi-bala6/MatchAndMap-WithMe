@@ -86,14 +86,21 @@ export default function EmergencySOSModal({
           const data = await res.json()
           const place =
             data.display_name ||
-            [data.address?.suburb, data.address?.city || data.address?.town, data.address?.state, "India"]
+            [
+              data.address?.suburb,
+              data.address?.city || data.address?.town,
+              data.address?.state,
+              "India",
+            ]
               .filter(Boolean)
               .join(", ")
           setLocationName(`${place} (±${acc}m)`)
           return
         }
       } catch {}
-      setLocationName(`Lat: ${lat.toFixed(5)}°, Lon: ${lng.toFixed(5)}° (±${acc}m)`)
+      setLocationName(
+        `Lat: ${lat.toFixed(5)}°, Lon: ${lng.toFixed(5)}° (±${acc}m)`,
+      )
     }
 
     // 1. Geolocation
@@ -112,7 +119,9 @@ export default function EmergencySOSModal({
           const fallbackLat = 17.6868
           const fallbackLng = 83.2185
           setCoords({ lat: fallbackLat, lng: fallbackLng, accuracy: 25 })
-          setLocationName("Visakhapatnam, Andhra Pradesh, India (Default Regional GPS)")
+          setLocationName(
+            "Visakhapatnam, Andhra Pradesh, India (Default Regional GPS)",
+          )
         },
         { enableHighAccuracy: true, timeout: 10000 },
       )

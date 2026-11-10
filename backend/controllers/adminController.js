@@ -25,6 +25,16 @@ export async function updateVerification(req, res) {
   res.json(user)
 }
 
+export async function deleteUser(req, res) {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+    if (!user) return res.status(404).json({ message: "User not found" })
+    return res.json({ ok: true, message: "User deleted successfully" })
+  } catch (error) {
+    return res.status(500).json({ message: error.message || "Failed to delete user" })
+  }
+}
+
 export async function listReports(_req, res) {
   res.json(await Report.find().populate("reporter", "name email").sort({ createdAt: -1 }))
 }

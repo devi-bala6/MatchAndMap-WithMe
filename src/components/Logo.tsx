@@ -38,6 +38,7 @@ export default function Logo({
         <div>
           <div style={{ lineHeight: 1.1 }}>
             <span
+              className="logo-title"
               style={{
                 fontFamily: "Outfit, sans-serif",
                 fontWeight: 900,

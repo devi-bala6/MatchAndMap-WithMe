@@ -173,7 +173,9 @@ export default function MobileNav({
       >
         {primaryItems.map((item) => {
           const isItemActive =
-            item.view === "more" ? isMoreActive || showMoreMenu : current === item.view
+            item.view === "more"
+              ? isMoreActive || showMoreMenu
+              : current === item.view
 
           return (
             <button
@@ -192,7 +194,9 @@ export default function MobileNav({
                   : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              <div className="flex items-center justify-center">{item.icon}</div>
+              <div className="flex items-center justify-center">
+                {item.icon}
+              </div>
               <span className="text-[10px] mt-1 font-display tracking-tight leading-none font-semibold">
                 {item.label}
               </span>
@@ -289,4 +293,3 @@ export default function MobileNav({
     </>
   )
 }
-

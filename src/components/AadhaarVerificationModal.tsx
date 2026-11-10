@@ -77,7 +77,10 @@ export default function AadhaarVerificationModal({
         setStep("otp")
         setOtpTimer(45)
       } else {
-        setErrorMsg(res?.message || "Could not request OTP. Please verify your Aadhaar number.")
+        setErrorMsg(
+          res?.message ||
+            "Could not request OTP. Please verify your Aadhaar number.",
+        )
       }
     } catch (err: any) {
       // Direct validation fallback
@@ -115,7 +118,10 @@ export default function AadhaarVerificationModal({
           onSuccess(res.user)
         }
       } else {
-        setErrorMsg(res?.message || "Invalid OTP entered. Please check SMS on your mobile.")
+        setErrorMsg(
+          res?.message ||
+            "Invalid OTP entered. Please check SMS on your mobile.",
+        )
       }
     } catch (err: any) {
       if (otp.trim() === "789012" || otp.trim().length === 6) {
@@ -172,7 +178,10 @@ export default function AadhaarVerificationModal({
               <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 flex items-start gap-3">
                 <Lock className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <div className="text-xs text-emerald-300 leading-relaxed">
-                  <strong>Zero Knowledge Privacy:</strong> We only store masked Aadhaar (<code>XXXX-XXXX-1234</code>) and UIDAI verification tokens. Your complete Aadhaar number is never permanently saved.
+                  <strong>Zero Knowledge Privacy:</strong> We only store masked
+                  Aadhaar (<code>XXXX-XXXX-1234</code>) and UIDAI verification
+                  tokens. Your complete Aadhaar number is never permanently
+                  saved.
                 </div>
               </div>
 
@@ -197,7 +206,8 @@ export default function AadhaarVerificationModal({
                   )}
                 </div>
                 <p className="text-[11px] font-mono text-slate-400 mt-1.5">
-                  An OTP will be dispatched to the mobile number registered with your UIDAI Aadhaar profile.
+                  An OTP will be dispatched to the mobile number registered with
+                  your UIDAI Aadhaar profile.
                 </p>
               </div>
 
@@ -220,7 +230,8 @@ export default function AadhaarVerificationModal({
                   </>
                 ) : (
                   <>
-                    Send UIDAI Verification OTP <ArrowRight className="w-4 h-4" />
+                    Send UIDAI Verification OTP{" "}
+                    <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
@@ -232,8 +243,12 @@ export default function AadhaarVerificationModal({
               <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/25 flex items-start gap-3">
                 <KeyRound className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
                 <div className="text-xs text-cyan-300 leading-relaxed">
-                  <div className="font-bold text-white mb-0.5">{providerName}</div>
-                  Enter the 6-digit OTP sent to your Aadhaar-linked mobile number for card ending in <strong>{cleanDigits.slice(-4)}</strong>.
+                  <div className="font-bold text-white mb-0.5">
+                    {providerName}
+                  </div>
+                  Enter the 6-digit OTP sent to your Aadhaar-linked mobile
+                  number for card ending in{" "}
+                  <strong>{cleanDigits.slice(-4)}</strong>.
                   {demoOtp && (
                     <div className="mt-1.5 font-mono text-[11px] text-amber-300 bg-amber-950/40 p-1.5 rounded-lg border border-amber-500/30">
                       💡 Sandbox Test OTP: <strong>{demoOtp}</strong>
@@ -249,7 +264,9 @@ export default function AadhaarVerificationModal({
                 <input
                   type="text"
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                  onChange={(e) =>
+                    setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                  }
                   placeholder="e.g. 789012"
                   className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-2xl font-mono text-center text-xl tracking-[0.3em] text-cyan-400 placeholder-slate-700 focus:outline-none focus:border-cyan-400 transition-colors"
                   maxLength={6}
@@ -287,7 +304,8 @@ export default function AadhaarVerificationModal({
                     </>
                   ) : (
                     <>
-                      Verify & Confirm Identity <ShieldCheck className="w-4 h-4" />
+                      Verify & Confirm Identity{" "}
+                      <ShieldCheck className="w-4 h-4" />
                     </>
                   )}
                 </button>
@@ -307,9 +325,14 @@ export default function AadhaarVerificationModal({
                 </h4>
                 <p className="text-xs text-slate-300 mt-1 max-w-sm mx-auto">
                   {verifiedName ? (
-                    <span>Identity confirmed for <strong>{verifiedName}</strong> with official UIDAI standards.</span>
+                    <span>
+                      Identity confirmed for <strong>{verifiedName}</strong>{" "}
+                      with official UIDAI standards.
+                    </span>
                   ) : (
-                    <span>Your identity has been authenticated with UIDAI standards.</span>
+                    <span>
+                      Your identity has been authenticated with UIDAI standards.
+                    </span>
                   )}
                 </p>
               </div>

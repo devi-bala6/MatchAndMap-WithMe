@@ -60,32 +60,29 @@ interface FoodRecommendation {
   landmarkQuery: string
 }
 
-const DESTINATION_INTELLIGENCE: Record<
-  string,
-  {
-    state: string
-    ecoScore: number
-    days: {
-      title: string
-      location: string
-      activities: {
-        name: string
-        type: "sightseeing" | "nature" | "cultural" | "adventure" | "food"
-        time: string
-        duration: string
-        cost: number
-        notes: string
-        lat: number
-        lng: number
-      }[]
-      foodSpots: FoodRecommendation[]
-      nearbyGems: NearbyGem[]
-      stay: string
-      transport: string
-      ecoTip: string
+const DESTINATION_INTELLIGENCE: Record<string, {
+  state: string
+  ecoScore: number
+  days: {
+    title: string
+    location: string
+    activities: {
+      name: string
+      type: "sightseeing" | "nature" | "cultural" | "adventure" | "food"
+      time: string
+      duration: string
+      cost: number
+      notes: string
+      lat: number
+      lng: number
     }[]
-  }
-> = {
+    foodSpots: FoodRecommendation[]
+    nearbyGems: NearbyGem[]
+    stay: string
+    transport: string
+    ecoTip: string
+  }[]
+}> = {
   visakhapatnam: {
     state: "Andhra Pradesh",
     ecoScore: 92,
@@ -95,7 +92,8 @@ const DESTINATION_INTELLIGENCE: Record<
         location: "RK Beach & Central Coast, Visakhapatnam",
         stay: "Solar-Powered Beach Eco-Homestay, Rushikonda",
         transport: "Electric Coastal Auto / Walkable Promenade",
-        ecoTip: "Support local coastal fishermen cooperative stalls and avoid single-use plastics along the beach.",
+        ecoTip:
+          "Support local coastal fishermen cooperative stalls and avoid single-use plastics along the beach.",
         activities: [
           {
             name: "INS Kursura Submarine Museum",
@@ -103,7 +101,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "08:30 AM",
             duration: "2.5 hrs",
             cost: 150,
-            notes: "Real decommissioned submarine museum with retired naval officer guided walkthrough.",
+            notes:
+              "Real decommissioned submarine museum with retired naval officer guided walkthrough.",
             lat: 17.7167,
             lng: 83.3333,
           },
@@ -113,7 +112,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "02:00 PM",
             duration: "2 hrs",
             cost: 120,
-            notes: "Panoramic 360-degree hilltop overlooking Bay of Bengal and city coastline.",
+            notes:
+              "Panoramic 360-degree hilltop overlooking Bay of Bengal and city coastline.",
             lat: 17.7475,
             lng: 83.3444,
           },
@@ -123,7 +123,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "05:00 PM",
             duration: "2 hrs",
             cost: 50,
-            notes: "Natural coastal rock formations, shipwreck viewpoint, and evening sea breeze.",
+            notes:
+              "Natural coastal rock formations, shipwreck viewpoint, and evening sea breeze.",
             lat: 17.7612,
             lng: 83.3645,
           },
@@ -132,7 +133,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_vizag_1",
             name: "Sea Inn (Raju Gaari Dhaba)",
-            specialty: "Fresh Andhra Prawns Fry, Vanjaram Fish Curry & Ghee Biryani",
+            specialty:
+              "Fresh Andhra Prawns Fry, Vanjaram Fish Curry & Ghee Biryani",
             diet: "Coastal Seafood & Non-Veg",
             locationDesc: "Rushikonda Beach Road, Visakhapatnam",
             priceRange: "₹250 - ₹450 per person",
@@ -144,7 +146,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_vizag_2",
             name: "Sai Ram Parlour",
-            specialty: "Ghee Pongal, MLA Pesarattu, Onion Upma Dosa & Filter Coffee",
+            specialty:
+              "Ghee Pongal, MLA Pesarattu, Onion Upma Dosa & Filter Coffee",
             diet: "Pure Vegetarian",
             locationDesc: "Diamond Park, Dwaraka Nagar, Visakhapatnam",
             priceRange: "₹80 - ₹180 per person",
@@ -156,7 +159,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_vizag_3",
             name: "Hotel Daspalla (Heritage Andhra Bhojanam)",
-            specialty: "Traditional Full Andhra Thali with Gongura Pachadi on Banana Leaf",
+            specialty:
+              "Traditional Full Andhra Thali with Gongura Pachadi on Banana Leaf",
             diet: "Traditional Thali",
             locationDesc: "Surya Bagh, Jagadamba Junction, Visakhapatnam",
             priceRange: "₹220 - ₹400 per person",
@@ -173,7 +177,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Water Adventure",
             distance: "3.5 km off main route",
             timeToDetour: "10 min drive",
-            description: "Certified eco-friendly Blue Flag beach with kayaking and windsurfing.",
+            description:
+              "Certified eco-friendly Blue Flag beach with kayaking and windsurfing.",
             cost: 200,
             bestTime: "Early Morning or Sunset",
             lat: 17.7816,
@@ -185,7 +190,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Archaeological Heritage",
             distance: "6.2 km from Kailasagiri",
             timeToDetour: "15 min drive",
-            description: "2,000-year-old hilltop Buddhist monastic ruins with stupas and stone viharas.",
+            description:
+              "2,000-year-old hilltop Buddhist monastic ruins with stupas and stone viharas.",
             cost: 50,
             bestTime: "3:30 PM - 5:00 PM",
             lat: 17.8242,
@@ -197,7 +203,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Scenic Viewpoint",
             distance: "4.0 km from RK Beach",
             timeToDetour: "12 min drive",
-            description: "Three adjacent hills hosting a historic Church, Mosque, and Temple overlooking the port.",
+            description:
+              "Three adjacent hills hosting a historic Church, Mosque, and Temple overlooking the port.",
             cost: 0,
             bestTime: "Sunset",
             lat: 17.6931,
@@ -210,7 +217,8 @@ const DESTINATION_INTELLIGENCE: Record<
         location: "Araku Highlands & Ananthagiri Hills, Andhra Pradesh",
         stay: "Bamboo Cottage Tribal Homestay, Araku",
         transport: "Vistadome Mountain Rail / Shared Eco-Jeep",
-        ecoTip: "Buy organic Araku Coffee directly from tribal cooperatives (Girijan Cooperative Corporation).",
+        ecoTip:
+          "Buy organic Araku Coffee directly from tribal cooperatives (Girijan Cooperative Corporation).",
         activities: [
           {
             name: "Borra Caves Stalactite Caverns",
@@ -218,7 +226,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "09:00 AM",
             duration: "3 hrs",
             cost: 200,
-            notes: "Deepest karst cave formation in India with natural million-year-old rock formations.",
+            notes:
+              "Deepest karst cave formation in India with natural million-year-old rock formations.",
             lat: 18.2811,
             lng: 83.0392,
           },
@@ -228,7 +237,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "02:30 PM",
             duration: "2.5 hrs",
             cost: 150,
-            notes: "Organic shade-grown coffee tasting and indigenous Dhimsa dance cultural showcase.",
+            notes:
+              "Organic shade-grown coffee tasting and indigenous Dhimsa dance cultural showcase.",
             lat: 18.3273,
             lng: 82.8775,
           },
@@ -238,7 +248,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "05:00 PM",
             duration: "1.5 hrs",
             cost: 40,
-            notes: "Smooth natural rock water cascades framed by towering pine woods.",
+            notes:
+              "Smooth natural rock water cascades framed by towering pine woods.",
             lat: 18.2917,
             lng: 82.7844,
           },
@@ -247,7 +258,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_araku_1",
             name: "Araku Native Bamboo Chicken Stalls",
-            specialty: "Wood-fire roasted country chicken cooked in green bamboo stems without oil",
+            specialty:
+              "Wood-fire roasted country chicken cooked in green bamboo stems without oil",
             diet: "Coastal Seafood & Non-Veg",
             locationDesc: "Ghat Road & Tribal Market, Araku Valley",
             priceRange: "₹150 - ₹300 per portion",
@@ -259,7 +271,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_araku_2",
             name: "Vasundhara Tribal Kitchen",
-            specialty: "Millet Rotis, Country Dal, Gongura Rice & Sweet Jaggery Sweetmeats",
+            specialty:
+              "Millet Rotis, Country Dal, Gongura Rice & Sweet Jaggery Sweetmeats",
             diet: "Traditional Thali",
             locationDesc: "Near Padmapuram Gardens, Araku Town",
             priceRange: "₹120 - ₹220 per person",
@@ -276,7 +289,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Hidden Waterfall",
             distance: "4.8 km from Borra Caves",
             timeToDetour: "20 min jeep trek",
-            description: "50-meter secluded cascade nestled inside Goyapani forest gorge.",
+            description:
+              "50-meter secluded cascade nestled inside Goyapani forest gorge.",
             cost: 100,
             bestTime: "11:00 AM - 1:00 PM",
             lat: 18.2589,
@@ -288,7 +302,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Nature Sanctuary",
             distance: "2.0 km from Araku Town",
             timeToDetour: "5 min drive",
-            description: "World War II era botanical garden featuring treetop wooden huts and rare medicinal plants.",
+            description:
+              "World War II era botanical garden featuring treetop wooden huts and rare medicinal plants.",
             cost: 60,
             bestTime: "Morning",
             lat: 18.3392,
@@ -307,7 +322,8 @@ const DESTINATION_INTELLIGENCE: Record<
         location: "Tirumala Hills, Andhra Pradesh",
         stay: "TTD Eco Guesthouse / Vedic Ashrama Stay",
         transport: "Electric APSRTC Ghat Buses / Foot Alipiri Pathway",
-        ecoTip: "Tirumala is a 100% plastic-free sacred zone. Carry cloth bags and utilize temple water filters.",
+        ecoTip:
+          "Tirumala is a 100% plastic-free sacred zone. Carry cloth bags and utilize temple water filters.",
         activities: [
           {
             name: "Sri Venkateswara Swamy Temple",
@@ -315,7 +331,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "07:30 AM",
             duration: "3.5 hrs",
             cost: 300,
-            notes: "Ancient sacred temple dedicated to Lord Balaji with Laddu Prasadam.",
+            notes:
+              "Ancient sacred temple dedicated to Lord Balaji with Laddu Prasadam.",
             lat: 13.6833,
             lng: 79.35,
           },
@@ -325,7 +342,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "02:00 PM",
             duration: "1.5 hrs",
             cost: 0,
-            notes: "Pre-Cambrian natural geological rock arch dating back 2.5 billion years.",
+            notes:
+              "Pre-Cambrian natural geological rock arch dating back 2.5 billion years.",
             lat: 13.6789,
             lng: 79.3456,
           },
@@ -335,7 +353,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "04:30 PM",
             duration: "2 hrs",
             cost: 0,
-            notes: "High hill viewpoint with sacred water spring and panoramic forested valleys.",
+            notes:
+              "High hill viewpoint with sacred water spring and panoramic forested valleys.",
             lat: 13.6942,
             lng: 79.3389,
           },
@@ -344,7 +363,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_tpt_1",
             name: "Hotel Bhimas Deluxe",
-            specialty: "Ghee Roast Masala Dosa, Cashew Upma & Piping Hot Filter Kaapi",
+            specialty:
+              "Ghee Roast Masala Dosa, Cashew Upma & Piping Hot Filter Kaapi",
             diet: "Pure Vegetarian",
             locationDesc: "Railway Station Road, Tirupati",
             priceRange: "₹100 - ₹220 per person",
@@ -356,7 +376,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_tpt_2",
             name: "Sri Lakshmi Gayatri Bhavan",
-            specialty: "Unlimited Traditional Andhra Leaf Meal with Ghee, Podi & Sambar",
+            specialty:
+              "Unlimited Traditional Andhra Leaf Meal with Ghee, Podi & Sambar",
             diet: "Traditional Thali",
             locationDesc: "Tirumala Bypass Road, Tirupati",
             priceRange: "₹140 - ₹250 per person",
@@ -385,7 +406,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Holy Stream",
             distance: "4.2 km from Tirumala Main Temple",
             timeToDetour: "12 min drive",
-            description: "Serene holy spring amidst dense Seshachalam Biosphere Reserve.",
+            description:
+              "Serene holy spring amidst dense Seshachalam Biosphere Reserve.",
             cost: 0,
             bestTime: "11:00 AM - 1:00 PM",
             lat: 13.7123,
@@ -397,7 +419,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Ancient Cave Temple",
             distance: "Foot of Hills (Alipiri)",
             timeToDetour: "At base gate",
-            description: "10th-century Chola-built Shiva temple with a mountain waterfall feeding the sacred pool.",
+            description:
+              "10th-century Chola-built Shiva temple with a mountain waterfall feeding the sacred pool.",
             cost: 20,
             bestTime: "Early Morning or 5:00 PM",
             lat: 13.6528,
@@ -409,7 +432,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Royal Citadel",
             distance: "14 km from Tirupati City",
             timeToDetour: "25 min drive",
-            description: "11th-century Vijayanagara royal stronghold with acoustic light & sound show.",
+            description:
+              "11th-century Vijayanagara royal stronghold with acoustic light & sound show.",
             cost: 80,
             bestTime: "4:00 PM - 7:00 PM",
             lat: 13.5833,
@@ -428,7 +452,8 @@ const DESTINATION_INTELLIGENCE: Record<
         location: "Agra, Uttar Pradesh",
         stay: "Solar-Powered Heritage Haveli, Taj East Gate",
         transport: "Battery Electric Golf Carts / Cycle Rickshaws",
-        ecoTip: "The 500m radius around the Taj Mahal is an EV-only Eco-Sensitive Taj Trapezium Zone.",
+        ecoTip:
+          "The 500m radius around the Taj Mahal is an EV-only Eco-Sensitive Taj Trapezium Zone.",
         activities: [
           {
             name: "Taj Mahal",
@@ -436,7 +461,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "06:00 AM",
             duration: "3 hrs",
             cost: 250,
-            notes: "UNESCO World Heritage white marble monument illuminated by early morning sunrise.",
+            notes:
+              "UNESCO World Heritage white marble monument illuminated by early morning sunrise.",
             lat: 27.1751,
             lng: 78.0421,
           },
@@ -446,7 +472,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "01:30 PM",
             duration: "2.5 hrs",
             cost: 100,
-            notes: "Vast red sandstone fortress containing Jahangiri Mahal, Diwan-i-Khas, and royal quarters.",
+            notes:
+              "Vast red sandstone fortress containing Jahangiri Mahal, Diwan-i-Khas, and royal quarters.",
             lat: 27.1795,
             lng: 78.0211,
           },
@@ -456,7 +483,8 @@ const DESTINATION_INTELLIGENCE: Record<
             time: "05:30 PM",
             duration: "2 hrs",
             cost: 50,
-            notes: "Charbagh garden complex on the opposite bank of Yamuna offering reflection sunset views.",
+            notes:
+              "Charbagh garden complex on the opposite bank of Yamuna offering reflection sunset views.",
             lat: 27.1801,
             lng: 78.0425,
           },
@@ -465,7 +493,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_agra_1",
             name: "Panchi Petha Store (Original)",
-            specialty: "Authentic Angoori Petha, Kesar Petha & Spicy Agra Dalmoth",
+            specialty:
+              "Authentic Angoori Petha, Kesar Petha & Spicy Agra Dalmoth",
             diet: "Heritage Street Food",
             locationDesc: "Hari Parwat Crossing, Agra",
             priceRange: "₹80 - ₹200 per pack",
@@ -477,7 +506,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_agra_2",
             name: "Dasaprakash Heritage Pure Veg",
-            specialty: "North & South Indian Thalis, Paneer Butter Masala & Kulfi Falooda",
+            specialty:
+              "North & South Indian Thalis, Paneer Butter Masala & Kulfi Falooda",
             diet: "Pure Vegetarian",
             locationDesc: "Sadar Bazaar, Agra Cantt",
             priceRange: "₹200 - ₹450 per person",
@@ -489,7 +519,8 @@ const DESTINATION_INTELLIGENCE: Record<
           {
             id: "food_agra_3",
             name: "Shankar Ji Sweets & Bedai",
-            specialty: "Crispy Urad Dal Bedai Poori with Spicy Aloo Sabzi & Hot Jalebis",
+            specialty:
+              "Crispy Urad Dal Bedai Poori with Spicy Aloo Sabzi & Hot Jalebis",
             diet: "Heritage Street Food",
             locationDesc: "Kinari Bazaar, Agra",
             priceRange: "₹60 - ₹120 per person",
@@ -506,7 +537,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Marble Mausoleum",
             distance: "3.8 km from Agra Fort",
             timeToDetour: "10 min drive",
-            description: "Delicate Pietra Dura marble inlay work that served as architectural blueprint for Taj Mahal.",
+            description:
+              "Delicate Pietra Dura marble inlay work that served as architectural blueprint for Taj Mahal.",
             cost: 80,
             bestTime: "Morning",
             lat: 27.1928,
@@ -518,7 +550,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "Social Impact Dining",
             distance: "1.2 km from Taj Gate",
             timeToDetour: "5 min walk",
-            description: "Community cafe run entirely by acid attack survivors serving delicious organic local meals.",
+            description:
+              "Community cafe run entirely by acid attack survivors serving delicious organic local meals.",
             cost: 200,
             bestTime: "Lunch or Evening Tea",
             lat: 27.1654,
@@ -530,7 +563,8 @@ const DESTINATION_INTELLIGENCE: Record<
             type: "UNESCO Citadel",
             distance: "36 km detour on expressway",
             timeToDetour: "45 min drive",
-            description: "Akbar's 16th-century ghost city with the towering 54-meter Buland Darwaza.",
+            description:
+              "Akbar's 16th-century ghost city with the towering 54-meter Buland Darwaza.",
             cost: 150,
             bestTime: "Afternoon",
             lat: 27.0944,
@@ -569,7 +603,11 @@ function generateDynamicItinerary(
         })),
         accommodation: d.stay,
         transport: d.transport,
-        meals: ["Regional Breakfast", "Local Traditional Thali", "Eco-Homestay Dinner"],
+        meals: [
+          "Regional Breakfast",
+          "Local Traditional Thali",
+          "Eco-Homestay Dinner",
+        ],
         budget: Math.round(totalBudget / Math.max(1, val.days.length)),
         ecoTip: d.ecoTip,
       }))
@@ -579,7 +617,9 @@ function generateDynamicItinerary(
         tripId: "",
         destination: destinationName,
         state: val.state,
-        startDate: new Date(Date.now() + 86400000 * 3).toISOString().split("T")[0],
+        startDate: new Date(Date.now() + 86400000 * 3)
+          .toISOString()
+          .split("T")[0],
         totalDays: days.length,
         totalBudget,
         ecoScore: val.ecoScore,
@@ -595,9 +635,18 @@ function generateDynamicItinerary(
 
   const adaptiveThemes = [
     { title: "Arrival & Historic City Trail", loc: "Old Quarter & Riverfront" },
-    { title: "Sacred Shrines & Heritage Wonders", loc: "Historic Complex & Sanctuary" },
-    { title: "Nature Reserve & Adventure Treks", loc: "High Ridge & Waterfall Trail" },
-    { title: "Local Craft Bazaars & Sunset Vista", loc: "Artisan Village & Viewpoint" },
+    {
+      title: "Sacred Shrines & Heritage Wonders",
+      loc: "Historic Complex & Sanctuary",
+    },
+    {
+      title: "Nature Reserve & Adventure Treks",
+      loc: "High Ridge & Waterfall Trail",
+    },
+    {
+      title: "Local Craft Bazaars & Sunset Vista",
+      loc: "Artisan Village & Viewpoint",
+    },
   ]
 
   for (let i = 1; i <= Math.min(daysCount, 5); i++) {
@@ -616,7 +665,8 @@ function generateDynamicItinerary(
           duration: "2.5 hrs",
           cost: Math.round(dailyBudget * 0.12),
           eco: true,
-          notes: "Walkable route guided by local eco-historians and community stewards.",
+          notes:
+            "Walkable route guided by local eco-historians and community stewards.",
         },
         {
           id: `act_${i}_2`,
@@ -626,7 +676,8 @@ function generateDynamicItinerary(
           duration: "2 hrs",
           cost: Math.round(dailyBudget * 0.18),
           eco: true,
-          notes: "Locally prepared authentic dishes supporting village cooperatives.",
+          notes:
+            "Locally prepared authentic dishes supporting village cooperatives.",
         },
         {
           id: `act_${i}_3`,
@@ -643,7 +694,8 @@ function generateDynamicItinerary(
       transport: "Shared Electric Transport & Walking Circuits",
       meals: ["Fresh Local Breakfast", "Traditional Thali", "Homestay Supper"],
       budget: Math.round(dailyBudget * 0.6),
-      ecoTip: "Carry reusable water flasks, support family-owned diners, and respect regional heritage sanctuaries.",
+      ecoTip:
+        "Carry reusable water flasks, support family-owned diners, and respect regional heritage sanctuaries.",
     })
   }
 
@@ -732,7 +784,9 @@ export default function Itinerary({ user }: { user?: User | null }) {
   const matchingIntel = Object.entries(DESTINATION_INTELLIGENCE).find(
     ([k]) => normKey.includes(k) || k.includes(normKey),
   )
-  const activeDayIntel = matchingIntel ? matchingIntel[1].days[safeActiveDay] : null
+  const activeDayIntel = matchingIntel
+    ? matchingIntel[1].days[safeActiveDay]
+    : null
 
   const foodSpots: FoodRecommendation[] = activeDayIntel?.foodSpots || [
     {
@@ -768,7 +822,8 @@ export default function Itinerary({ user }: { user?: User | null }) {
       type: "Artisan & Food Gem",
       distance: "1.8 km from city center",
       timeToDetour: "5 min walk",
-      description: "Historic organic bazaar featuring heritage snacks, handicrafts, and regional spices.",
+      description:
+        "Historic organic bazaar featuring heritage snacks, handicrafts, and regional spices.",
       cost: 100,
       bestTime: "Evening",
       lat: getCoordsForDestination(selectedDest).lat + 0.005,
@@ -780,7 +835,8 @@ export default function Itinerary({ user }: { user?: User | null }) {
       type: "Panoramic Lookout",
       distance: "4.2 km off highway",
       timeToDetour: "12 min drive",
-      description: "Quiet hillside sanctuary offering stunning morning light and fresh mountain air.",
+      description:
+        "Quiet hillside sanctuary offering stunning morning light and fresh mountain air.",
       cost: 0,
       bestTime: "Sunrise or Sunset",
       lat: getCoordsForDestination(selectedDest).lat - 0.008,
@@ -822,7 +878,11 @@ export default function Itinerary({ user }: { user?: User | null }) {
   } | null>(null)
 
   // Helper for generating pinpoint accurate Google Maps Direction links
-  const getDirectionsUrl = (lat: number | undefined, lng: number | undefined, name: string) => {
+  const getDirectionsUrl = (
+    lat: number | undefined,
+    lng: number | undefined,
+    name: string,
+  ) => {
     if (lat && lng && !isNaN(lat) && !isNaN(lng)) {
       return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
     }
@@ -843,13 +903,17 @@ export default function Itinerary({ user }: { user?: User | null }) {
             {selectedDest} Blueprint
           </h2>
           <p className="text-xs sm:text-sm mt-1 text-slate-400">
-            Authentic landmark stops, verified local food options, turn-by-turn directions, and on-the-way hidden gems.
+            Authentic landmark stops, verified local food options, turn-by-turn
+            directions, and on-the-way hidden gems.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           {/* Custom Search Form */}
-          <form onSubmit={handleCustomSearch} className="flex items-center gap-1.5">
+          <form
+            onSubmit={handleCustomSearch}
+            className="flex items-center gap-1.5"
+          >
             <div className="relative">
               <input
                 type="text"
@@ -917,19 +981,24 @@ export default function Itinerary({ user }: { user?: User | null }) {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="badge badge-cyan">{itin.state}</span>
-            <span className="badge badge-green">🌿 Eco Score: {itin.ecoScore}/100</span>
+            <span className="badge badge-green">
+              🌿 Eco Score: {itin.ecoScore}/100
+            </span>
           </div>
           <h3 className="font-display font-black text-2xl text-white">
             {itin.destination} {itin.totalDays}-Day Comprehensive Blueprint
           </h3>
           <p className="text-xs text-slate-400 mt-1">
-            Daily landmark stops, verified culinary food recommendations, and on-the-way detours.
+            Daily landmark stops, verified culinary food recommendations, and
+            on-the-way detours.
           </p>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <p className="font-mono text-[11px] text-slate-400">ESTIMATED BUDGET</p>
+            <p className="font-mono text-[11px] text-slate-400">
+              ESTIMATED BUDGET
+            </p>
             <p className="font-display font-black text-2xl text-cyan-400">
               ₹{totalCalculatedBudget.toLocaleString()}
             </p>
@@ -994,7 +1063,9 @@ export default function Itinerary({ user }: { user?: User | null }) {
                   </h3>
                 </div>
                 <div className="text-right">
-                  <span className="font-mono text-xs text-slate-400">Day Budget</span>
+                  <span className="font-mono text-xs text-slate-400">
+                    Day Budget
+                  </span>
                   <p className="font-display font-bold text-base text-slate-200">
                     ₹{day.budget.toLocaleString()}
                   </p>
@@ -1020,7 +1091,8 @@ export default function Itinerary({ user }: { user?: User | null }) {
                       On-The-Way & Nearby Gems Available!
                     </h5>
                     <p className="text-[11px] text-slate-400">
-                      Discover {nearbyGems.length} authentic hidden spots near today's route with real GPS directions.
+                      Discover {nearbyGems.length} authentic hidden spots near
+                      today's route with real GPS directions.
                     </p>
                   </div>
                 </div>
@@ -1043,8 +1115,10 @@ export default function Itinerary({ user }: { user?: User | null }) {
               <div className="space-y-3">
                 {day.activities.map((act, idx) => {
                   const intelAct = activeDayIntel?.activities[idx]
-                  const lat = intelAct?.lat || getCoordsForDestination(selectedDest).lat
-                  const lng = intelAct?.lng || getCoordsForDestination(selectedDest).lng
+                  const lat =
+                    intelAct?.lat || getCoordsForDestination(selectedDest).lat
+                  const lng =
+                    intelAct?.lng || getCoordsForDestination(selectedDest).lng
                   const directionsUrl = getDirectionsUrl(lat, lng, act.name)
 
                   return (
@@ -1140,7 +1214,11 @@ export default function Itinerary({ user }: { user?: User | null }) {
 
               <div className="grid grid-cols-1 gap-3">
                 {foodSpots.map((spot) => {
-                  const foodDirectionsUrl = getDirectionsUrl(spot.lat, spot.lng, spot.name)
+                  const foodDirectionsUrl = getDirectionsUrl(
+                    spot.lat,
+                    spot.lng,
+                    spot.name,
+                  )
 
                   return (
                     <div
@@ -1260,7 +1338,9 @@ export default function Itinerary({ user }: { user?: User | null }) {
       {selectedGemsDay !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
-          onClick={(e) => e.target === e.currentTarget && setSelectedGemsDay(null)}
+          onClick={(e) =>
+            e.target === e.currentTarget && setSelectedGemsDay(null)
+          }
         >
           <div className="w-full max-w-2xl bg-slate-900 border border-purple-500/30 rounded-3xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
             {/* Modal Header */}
@@ -1290,7 +1370,11 @@ export default function Itinerary({ user }: { user?: User | null }) {
             <div className="p-6 space-y-4 overflow-y-auto">
               {nearbyGems.map((gem) => {
                 const isAdded = addedGems.includes(gem.id)
-                const gemDirectionsUrl = getDirectionsUrl(gem.lat, gem.lng, gem.name)
+                const gemDirectionsUrl = getDirectionsUrl(
+                  gem.lat,
+                  gem.lng,
+                  gem.name,
+                )
 
                 return (
                   <div

@@ -75,12 +75,16 @@ export default function Dashboard({ user, onNav }: DashboardProps) {
         ])
 
         if (Array.isArray(liveMatches)) {
-          const currentId = (user?.id || (user as any)?._id || "").toString().toLowerCase()
+          const currentId = (user?.id || (user as any)?._id || "")
+            .toString()
+            .toLowerCase()
           const currentEmail = (user?.email || "").toLowerCase().trim()
           const currentName = (user?.name || "").toLowerCase().trim()
 
           const cleanMatches = liveMatches.filter((m) => {
-            const mId = (m.user?.id || (m.user as any)?._id || "").toString().toLowerCase()
+            const mId = (m.user?.id || (m.user as any)?._id || "")
+              .toString()
+              .toLowerCase()
             const mEmail = (m.user?.email || "").toLowerCase().trim()
             const mName = (m.user?.name || "").toLowerCase().trim()
 
@@ -245,9 +249,10 @@ export default function Dashboard({ user, onNav }: DashboardProps) {
               state={nextTrip.state}
               fallback={nextTrip.image}
               alt={nextTrip.destination}
-              className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+              className="absolute inset-0 w-full h-full object-cover opacity-85 transition-opacity pointer-events-none"
             />
-            <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-950/80 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-950/80 to-transparent dark:block hidden pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-white via-white/85 to-transparent light:block dark:hidden pointer-events-none" />
 
             <div className="relative z-10 p-7 flex flex-col justify-between h-full space-y-6">
               <div className="flex items-start justify-between">

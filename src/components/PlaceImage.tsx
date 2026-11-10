@@ -42,7 +42,7 @@ export default function PlaceImage({
     <img
       src={image}
       alt={alt}
-      className={className}
+      className={`place-image ${className || ""}`}
       style={style}
       loading="lazy"
       onError={() => {

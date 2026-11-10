@@ -38,9 +38,20 @@ function deduplicateTrips(tripList: any[]): Trip[] {
       seen.add(tripId)
       unique.push({
         id: tripId,
-        userId: t.userId || (typeof t.owner === "object" ? t.owner?._id || t.owner?.id : t.owner) || "",
-        userName: t.userName || (typeof t.owner === "object" ? t.owner?.name : "") || "Traveler",
-        userAvatar: t.userAvatar || (typeof t.owner === "object" ? t.owner?.avatar : "") || "",
+        userId:
+          t.userId ||
+          (typeof t.owner === "object"
+            ? t.owner?._id || t.owner?.id
+            : t.owner) ||
+          "",
+        userName:
+          t.userName ||
+          (typeof t.owner === "object" ? t.owner?.name : "") ||
+          "Traveler",
+        userAvatar:
+          t.userAvatar ||
+          (typeof t.owner === "object" ? t.owner?.avatar : "") ||
+          "",
         destination: t.destination,
         state: t.state || "",
         image: t.image || "",
@@ -59,10 +70,14 @@ function deduplicateTrips(tripList: any[]): Trip[] {
         description: t.description || "",
         status: t.status || "open",
         requestedUsers: (t.requestedUsers || []).map((u: any) =>
-          typeof u === "object" && u !== null ? (u._id || u.id || "").toString() : u.toString()
+          typeof u === "object" && u !== null
+            ? (u._id || u.id || "").toString()
+            : u.toString(),
         ),
         approvedUsers: (t.approvedUsers || []).map((u: any) =>
-          typeof u === "object" && u !== null ? (u._id || u.id || "").toString() : u.toString()
+          typeof u === "object" && u !== null
+            ? (u._id || u.id || "").toString()
+            : u.toString(),
         ),
       })
     }
@@ -71,7 +86,6 @@ function deduplicateTrips(tripList: any[]): Trip[] {
 }
 
 import TripDetailModal from "../components/TripDetailModal"
-
 
 export default function BrowseTrips({
   user,
@@ -488,15 +502,8 @@ export default function BrowseTrips({
                     alt={trip.destination}
                     className="w-full h-full object-cover"
                     fallback={trip.image}
-                    style={{ opacity: 0.7 }}
                   />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(to top, rgba(8,13,26,1) 0%, transparent 60%)",
-                    }}
-                  />
+                  <div className="absolute inset-0 card-photo-gradient pointer-events-none" />
                   <div className="absolute top-3 left-3 flex gap-1.5">
                     <span
                       className="badge"

@@ -2,6 +2,7 @@ import { useState } from "react"
 import type { View } from "../types"
 import { apiRequest } from "../lib/api"
 import Logo from "../components/Logo"
+import ThemeToggle from "../components/ThemeToggle"
 
 interface AuthProps {
   mode: "login" | "register"
@@ -50,7 +51,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       return
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+    if (cleanEmail !== "admin" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
       setError("Please enter a valid email address.")
       return
     }
@@ -60,7 +61,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       return
     }
 
-    if (password.length < 6) {
+    if (password.length < (isLogin ? 4 : 6)) {
       setError("Password must be at least 6 characters long.")
       return
     }
@@ -73,7 +74,7 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
     setLoading(true)
 
     try {
-      const result = await apiRequest<{ token: string; user: any }>(
+      const result = await apiRequest<{ token: string user: any }>(
         isLogin ? "/auth/login" : "/auth/register",
         {
           method: "POST",
@@ -90,9 +91,16 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       else onRegister(result.user)
     } catch (requestError: any) {
       console.error("Authentication error:", requestError)
-      let msg = requestError?.message || "Authentication failed. Please check your credentials."
-      if (isLogin && (msg.toLowerCase().includes("invalid email") || msg.toLowerCase().includes("invalid credentials"))) {
-        msg = "No account found with this email or incorrect password. Please click 'Create account' below to register first."
+      let msg =
+        requestError?.message ||
+        "Authentication failed. Please check your credentials."
+      if (
+        isLogin &&
+        (msg.toLowerCase().includes("invalid email") ||
+          msg.toLowerCase().includes("invalid credentials"))
+      ) {
+        msg =
+          "No account found with this email or incorrect password. Please click 'Create account' below to register first."
       }
       setError(msg)
     } finally {
@@ -459,7 +467,10 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
       </div>
 
       {/* Right panel - form */}
-      <div className="flex-1 flex items-center justify-center px-6 sm:px-8 py-10 sm:py-12">
+      <div className="flex-1 flex items-center justify-center px-6 sm:px-8 py-10 sm:py-12 relative">
+        <div className="absolute top-5 right-5 sm:top-6 sm:right-6">
+          <ThemeToggle compact={false} showLabel={true} />
+        </div>
         <div style={{ width: "100%", maxWidth: 420 }}>
           {/* Mobile logo header */}
           <div className="lg:hidden mb-6 flex justify-center">
@@ -603,7 +614,10 @@ export default function Auth({ mode, onNav, onLogin, onRegister }: AuthProps) {
             </button>
 
             {!isLogin && (
-              <p className="text-xs text-center mt-2" style={{ color: "#475569" }}>
+              <p
+                className="text-xs text-center mt-2"
+                style={{ color: "#475569" }}
+              >
                 By creating an account, you agree to our Terms of Service and
                 Privacy Policy.
               </p>

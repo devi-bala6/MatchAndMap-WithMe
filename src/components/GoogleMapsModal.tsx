@@ -41,7 +41,8 @@ export default function GoogleMapsModal({
   specialty,
 }: GoogleMapsModalProps) {
   const [mapType, setMapType] = useState<"m" | "k">("m") // 'm' for roadmap, 'k' for satellite
-  const [travelMode, setTravelMode] = useState<"driving" | "transit" | "walking">("driving")
+  const [travelMode, setTravelMode] =
+    useState<"driving" | "transit" | "walking">("driving")
 
   if (!isOpen) return null
 
@@ -50,18 +51,21 @@ export default function GoogleMapsModal({
   const encodedQuery = encodeURIComponent(fullSearchQuery)
 
   // Embed URL using official Google Maps embed interface
-  const embedUrl = lat && lng && !isNaN(lat) && !isNaN(lng)
-    ? `https://maps.google.com/maps?q=${lat},${lng}&t=${mapType}&z=15&ie=UTF8&iwloc=&output=embed`
-    : `https://maps.google.com/maps?q=${encodedQuery}&t=${mapType}&z=15&ie=UTF8&iwloc=&output=embed`
+  const embedUrl =
+    lat && lng && !isNaN(lat) && !isNaN(lng)
+      ? `https://maps.google.com/maps?q=${lat},${lng}&t=${mapType}&z=15&ie=UTF8&iwloc=&output=embed`
+      : `https://maps.google.com/maps?q=${encodedQuery}&t=${mapType}&z=15&ie=UTF8&iwloc=&output=embed`
 
   // Live Navigation Direction URL
-  const directionsUrl = lat && lng && !isNaN(lat) && !isNaN(lng)
-    ? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=${travelMode}`
-    : `https://www.google.com/maps/dir/?api=1&destination=${encodedQuery}&travelmode=${travelMode}`
+  const directionsUrl =
+    lat && lng && !isNaN(lat) && !isNaN(lng)
+      ? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=${travelMode}`
+      : `https://www.google.com/maps/dir/?api=1&destination=${encodedQuery}&travelmode=${travelMode}`
 
-  const openAppUrl = lat && lng && !isNaN(lat) && !isNaN(lng)
-    ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
-    : `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`
+  const openAppUrl =
+    lat && lng && !isNaN(lat) && !isNaN(lng)
+      ? `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
+      : `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`
 
   return (
     <div
@@ -214,7 +218,8 @@ export default function GoogleMapsModal({
               className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono font-bold flex items-center gap-2 transition-all border border-slate-700"
             >
               <MapPin className="w-4 h-4 text-cyan-400" />
-              View Place in Google Maps <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+              View Place in Google Maps{" "}
+              <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
             </a>
 
             <a
@@ -224,7 +229,8 @@ export default function GoogleMapsModal({
               className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-slate-950 text-xs font-display font-black flex items-center gap-2 transition-all shadow-lg shadow-cyan-500/20"
             >
               <Navigation className="w-4 h-4" />
-              Start Live Navigation in Google Maps <ExternalLink className="w-3.5 h-3.5" />
+              Start Live Navigation in Google Maps{" "}
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

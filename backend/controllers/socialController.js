@@ -3,7 +3,7 @@ import { isDbConnected, localUsers, localMessages, localConnections, localReview
 
 export async function listBuddies(req, res) {
   try {
-    const currentUserId = req.user._id?.toString() || req.user.id || "u1"
+    const currentUserId = (req.user._id || req.user.id || req.user.sub || "u1").toString()
     let allUsers = []
 
     if (isDbConnected()) {
@@ -16,7 +16,6 @@ export async function listBuddies(req, res) {
       })
     }
 
-    const currentUserId = (req.user._id || req.user.id || req.user.sub || "").toString()
     const currentUserEmail = (req.user.email || "").toLowerCase().trim()
 
     const currentUser =

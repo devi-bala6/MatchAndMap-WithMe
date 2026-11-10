@@ -8,6 +8,48 @@ export const localConnections = []
 export const localReviews = []
 export const localNotifications = []
 
+// Pre-seed default administrator
+localUsers.set("admin@matchandmap.in", {
+  _id: "admin_master_001",
+  name: "System Administrator",
+  email: "admin@matchandmap.in",
+  role: "admin",
+  status: "active",
+  verified: true,
+  createdAt: new Date(),
+  interests: ["Administration", "Security", "Travel Safety"],
+  hobbies: ["Platform Moderation"],
+  languages: ["English", "Hindi"],
+  budget: "mid-range",
+  travelStyle: "Admin",
+  tripsCount: 0,
+  rating: 5.0,
+  reviewCount: 0,
+  ecoScore: 100,
+  phone: "+91 9876543210",
+  beneficiary: { name: "Platform Ops", relation: "HQ", phone: "+91 9876543210", email: "support@matchandmap.in", address: "HQ" }
+})
+localUsers.set("admin@matchandmap.com", {
+  _id: "admin_master_002",
+  name: "System Administrator",
+  email: "admin@matchandmap.com",
+  role: "admin",
+  status: "active",
+  verified: true,
+  createdAt: new Date(),
+  interests: ["Administration", "Security", "Travel Safety"],
+  hobbies: ["Platform Moderation"],
+  languages: ["English", "Hindi"],
+  budget: "mid-range",
+  travelStyle: "Admin",
+  tripsCount: 0,
+  rating: 5.0,
+  reviewCount: 0,
+  ecoScore: 100,
+  phone: "+91 9876543210",
+  beneficiary: { name: "Platform Ops", relation: "HQ", phone: "+91 9876543210", email: "support@matchandmap.in", address: "HQ" }
+})
+
 export function isDbConnected() {
   return mongoose.connection.readyState === 1
 }

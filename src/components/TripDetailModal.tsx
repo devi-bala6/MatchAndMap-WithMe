@@ -58,7 +58,10 @@ export default function TripDetailModal({
   onOpenChat,
   isOwner = false,
 }: TripDetailModalProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "itinerary" | "food" | "eco" | "companions">("overview")
+  const [activeTab, setActiveTab] =
+    useState<"overview" | "itinerary" | "food" | "eco" | "companions">(
+      "overview",
+    )
   const [showMap, setShowMap] = useState(false)
   const [requestSent, setRequestSent] = useState(false)
 
@@ -80,7 +83,10 @@ export default function TripDetailModal({
 
   const totalCompanions = trip.maxCompanions || 4
   const filledCount = (trip.approvedUsers || []).length
-  const fillPercentage = Math.min(100, Math.round((filledCount / totalCompanions) * 100))
+  const fillPercentage = Math.min(
+    100,
+    Math.round((filledCount / totalCompanions) * 100),
+  )
 
   function handleJoinClick() {
     if (onRequest) {
@@ -94,7 +100,9 @@ export default function TripDetailModal({
       navigator
         .share({
           title: `Trip to ${trip.destination} with ${hostName}`,
-          text: `Join this ${trip.ecoFriendly ? "eco-friendly " : ""}trip to ${trip.destination} (${trip.duration || 3} days) on Match&Map!`,
+          text: `Join this ${
+            trip.ecoFriendly ? "eco-friendly " : ""
+          }trip to ${trip.destination} (${trip.duration || 3} days) on Match&Map!`,
           url: window.location.href,
         })
         .catch(() => {})
@@ -145,9 +153,8 @@ export default function TripDetailModal({
               alt={trip.destination}
               className="w-full h-full object-cover absolute inset-0"
               fallback={trip.image}
-              style={{ opacity: 0.65 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+            <div className="absolute inset-0 card-photo-gradient pointer-events-none" />
 
             {/* Badges on Top */}
             <div className="absolute top-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 z-10">
@@ -156,7 +163,10 @@ export default function TripDetailModal({
                   className="inline-flex items-center rounded-full px-2.5 py-1 font-display text-xs font-bold shadow-md uppercase tracking-wider"
                   style={{
                     background: "rgba(15,23,42,0.85)",
-                    color: budgetColors[trip.budget as keyof typeof budgetColors] || "#0ea5e9",
+                    color:
+                      budgetColors[
+                        (trip.budget as keyof typeof budgetColors)
+                      ] || "#0ea5e9",
                     border: "1px solid rgba(255,255,255,0.15)",
                   }}
                 >
@@ -179,7 +189,8 @@ export default function TripDetailModal({
                 {trip.destination}
               </h2>
               <p className="font-mono text-xs sm:text-sm text-cyan-300/90 mt-0.5">
-                {trip.state ? `${trip.state}, India` : "India"} · GPS: {tripGeo.lat.toFixed(2)}° N, {tripGeo.lng.toFixed(2)}° E
+                {trip.state ? `${trip.state}, India` : "India"} · GPS:{" "}
+                {tripGeo.lat.toFixed(2)}° N, {tripGeo.lng.toFixed(2)}° E
               </p>
             </div>
           </div>
@@ -189,7 +200,8 @@ export default function TripDetailModal({
             <div className="flex items-center gap-2 text-xs font-mono text-slate-300">
               <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>
-                Altitude: <strong>{tripGeo.elevation}</strong> · Ideal: <strong>{intel.bestSeason}</strong>
+                Altitude: <strong>{tripGeo.elevation}</strong> · Ideal:{" "}
+                <strong>{intel.bestSeason}</strong>
               </span>
             </div>
             <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -206,7 +218,8 @@ export default function TripDetailModal({
                 rel="noreferrer"
                 className="flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-mono font-semibold flex items-center justify-center gap-1.5 transition-all"
               >
-                <Navigation className="w-3.5 h-3.5" /> Directions <ExternalLink className="w-3 h-3" />
+                <Navigation className="w-3.5 h-3.5" /> Directions{" "}
+                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
@@ -268,7 +281,9 @@ export default function TripDetailModal({
                   <p className="font-display font-bold text-sm text-slate-100 truncate">
                     {hostName}
                   </p>
-                  <span className="badge badge-green text-[10px]">✓ Verified Host</span>
+                  <span className="badge badge-green text-[10px]">
+                    ✓ Verified Host
+                  </span>
                 </div>
                 <p className="font-mono text-xs text-slate-400 mt-0.5">
                   Trip Organizer & Guide · Rating: ★ 4.9
@@ -294,7 +309,11 @@ export default function TripDetailModal({
               { id: "itinerary", label: "🗺️ Key Attractions", icon: MapPin },
               { id: "food", label: "🍲 Food Guide", icon: Utensils },
               { id: "eco", label: "🌿 Eco & Weather", icon: Leaf },
-              { id: "companions", label: `👥 Companions (${filledCount}/${totalCompanions})`, icon: Users },
+              {
+                id: "companions",
+                label: `👥 Companions (${filledCount}/${totalCompanions})`,
+                icon: Users,
+              },
             ].map((t) => (
               <button
                 key={t.id}
@@ -332,7 +351,10 @@ export default function TripDetailModal({
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {trip.interests.map((i) => (
-                      <span key={i} className="badge badge-cyan text-xs py-1 px-2.5">
+                      <span
+                        key={i}
+                        className="badge badge-cyan text-xs py-1 px-2.5"
+                      >
                         {i}
                       </span>
                     ))}
@@ -347,19 +369,25 @@ export default function TripDetailModal({
                 </p>
                 <div className="grid grid-cols-3 gap-2.5 text-center">
                   <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-                    <p className="text-[11px] font-mono text-slate-400">Stay / Homestay</p>
+                    <p className="text-[11px] font-mono text-slate-400">
+                      Stay / Homestay
+                    </p>
                     <p className="font-display font-bold text-sm text-slate-200 mt-0.5">
                       ~₹{intel.dailyBudgetEstimate.stay}/day
                     </p>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-                    <p className="text-[11px] font-mono text-slate-400">Food & Meals</p>
+                    <p className="text-[11px] font-mono text-slate-400">
+                      Food & Meals
+                    </p>
                     <p className="font-display font-bold text-sm text-slate-200 mt-0.5">
                       ~₹{intel.dailyBudgetEstimate.food}/day
                     </p>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-                    <p className="text-[11px] font-mono text-slate-400">Local Travel</p>
+                    <p className="text-[11px] font-mono text-slate-400">
+                      Local Travel
+                    </p>
                     <p className="font-display font-bold text-sm text-slate-200 mt-0.5">
                       ~₹{intel.dailyBudgetEstimate.localTravel}/day
                     </p>
@@ -448,10 +476,17 @@ export default function TripDetailModal({
               <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
                 <div className="flex justify-between items-center text-xs font-mono mb-2">
                   <span className="text-slate-400">
-                    Spots Filled: <strong>{filledCount} of {totalCompanions}</strong>
+                    Spots Filled:{" "}
+                    <strong>
+                      {filledCount} of {totalCompanions}
+                    </strong>
                   </span>
                   <span className="text-cyan-400 font-bold">
-                    {remainingSpots > 0 ? `${remainingSpots} spot${remainingSpots > 1 ? "s" : ""} left` : "Trip Full"}
+                    {remainingSpots > 0
+                      ? `${remainingSpots} spot${
+                          remainingSpots > 1 ? "s" : ""
+                        } left`
+                      : "Trip Full"}
                   </span>
                 </div>
                 <div className="h-2.5 rounded-full bg-slate-800 overflow-hidden">
@@ -470,8 +505,12 @@ export default function TripDetailModal({
                 <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800">
                   <Avatar name={hostName} size={36} radius={10} />
                   <div className="flex-1">
-                    <p className="font-display font-bold text-xs text-slate-200">{hostName}</p>
-                    <p className="font-mono text-[11px] text-amber-400">👑 Host & Organizer</p>
+                    <p className="font-display font-bold text-xs text-slate-200">
+                      {hostName}
+                    </p>
+                    <p className="font-mono text-[11px] text-amber-400">
+                      👑 Host & Organizer
+                    </p>
                   </div>
                 </div>
 
@@ -480,12 +519,18 @@ export default function TripDetailModal({
                     key={uid}
                     className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/80 border border-slate-800"
                   >
-                    <Avatar name={`Traveler ${index + 1}`} size={36} radius={10} />
+                    <Avatar
+                      name={`Traveler ${index + 1}`}
+                      size={36}
+                      radius={10}
+                    />
                     <div className="flex-1">
                       <p className="font-display font-bold text-xs text-slate-200">
                         Confirmed Companion #{index + 1}
                       </p>
-                      <p className="font-mono text-[11px] text-emerald-400">✓ Verified Companion</p>
+                      <p className="font-mono text-[11px] text-emerald-400">
+                        ✓ Verified Companion
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -497,7 +542,9 @@ export default function TripDetailModal({
         {/* Bottom Action Footer */}
         <div className="p-4 sm:p-5 border-t border-slate-800 bg-slate-950 flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs font-mono text-slate-400 hidden sm:block">
-            {remainingSpots > 0 ? `✨ ${remainingSpots} spots remaining for this adventure` : "🔒 Trip capacity reached"}
+            {remainingSpots > 0
+              ? `✨ ${remainingSpots} spots remaining for this adventure`
+              : "🔒 Trip capacity reached"}
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -523,7 +570,10 @@ export default function TripDetailModal({
                 ⏳ Request Pending
               </span>
             ) : remainingSpots <= 0 ? (
-              <button disabled className="btn-primary opacity-50 cursor-not-allowed text-xs py-2.5 px-6">
+              <button
+                disabled
+                className="btn-primary opacity-50 cursor-not-allowed text-xs py-2.5 px-6"
+              >
                 Trip Full
               </button>
             ) : (

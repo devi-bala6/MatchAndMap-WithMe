@@ -8,7 +8,15 @@ import {
   DESTINATION_IMAGE_FALLBACK,
   getDestinationImage,
 } from "../lib/destinationImage.js"
-import { Check, UserCheck, X, MapPin, Navigation, ExternalLink, Compass } from "lucide-react"
+import {
+  Check,
+  UserCheck,
+  X,
+  MapPin,
+  Navigation,
+  ExternalLink,
+  Compass,
+} from "lucide-react"
 import GoogleMapsModal from "../components/GoogleMapsModal"
 import { getCoordsForDestination } from "../lib/geoUtils"
 
@@ -65,7 +73,9 @@ function TripCard({
             className="inline-flex items-center rounded-full px-3 py-1.5 font-display text-xs font-bold shadow-lg"
             style={{
               background: "rgba(240,249,255,0.97)",
-              color: budgetColors[trip.budget as keyof typeof budgetColors] || "#0ea5e9",
+              color:
+                budgetColors[(trip.budget as keyof typeof budgetColors)] ||
+                "#0ea5e9",
               border: "1px solid rgba(255,255,255,0.75)",
             }}
           >
@@ -81,7 +91,8 @@ function TripCard({
               color:
                 trip.status === "open"
                   ? "#166534"
-                  : statusColors[trip.status as keyof typeof statusColors] || "#64748b",
+                  : statusColors[(trip.status as keyof typeof statusColors)] ||
+                    "#64748b",
               border: "1px solid rgba(255,255,255,0.75)",
             }}
           >
@@ -157,7 +168,8 @@ function TripCard({
               className="font-display text-xs font-medium"
               style={{ color: "#94a3b8" }}
             >
-              {(trip.approvedUsers || []).length}/{trip.maxCompanions || 4} filled
+              {(trip.approvedUsers || []).length}/{trip.maxCompanions || 4}{" "}
+              filled
             </p>
           </div>
         </div>
@@ -184,7 +196,10 @@ function TripCard({
               border: "1px solid rgba(245,158,11,0.35)",
             }}
           >
-            <span className="font-mono text-xs font-bold" style={{ color: "#fbbf24" }}>
+            <span
+              className="font-mono text-xs font-bold"
+              style={{ color: "#fbbf24" }}
+            >
               🔔 {requestedCount} pending request{requestedCount > 1 ? "s" : ""}
             </span>
             <span className="font-mono text-[10px] text-amber-300 underline">
@@ -197,7 +212,8 @@ function TripCard({
         {approvedCount > 0 && (
           <div className="mt-2 flex items-center gap-2">
             <span className="font-mono text-xs" style={{ color: "#4ade80" }}>
-              ✓ {approvedCount} confirmed companion{approvedCount > 1 ? "s" : ""}
+              ✓ {approvedCount} confirmed companion
+              {approvedCount > 1 ? "s" : ""}
             </span>
           </div>
         )}
@@ -552,7 +568,6 @@ function CreateTripModal({
 
 import TripDetailModal from "../components/TripDetailModal"
 
-
 export default function Trips({
   user,
   onEcoMode,
@@ -572,16 +587,25 @@ export default function Trips({
       try {
         const liveTrips = await apiRequest<Trip[]>("/trips").catch(() => [])
         if (Array.isArray(liveTrips)) {
-          const myTrips = liveTrips.filter(
-            (t: any) => {
-              const tripOwnerId = (t.userId || t.owner?._id || t.owner || "").toString()
-              const isOwner = tripOwnerId === currentUserId
-              const isApproved = Array.isArray(t.approvedUsers) && t.approvedUsers.some(
-                (uid: any) => (typeof uid === "object" ? uid._id || uid.id : uid).toString() === currentUserId
+          const myTrips = liveTrips.filter((t: any) => {
+            const tripOwnerId = (
+              t.userId ||
+              t.owner?._id ||
+              t.owner ||
+              ""
+            ).toString()
+            const isOwner = tripOwnerId === currentUserId
+            const isApproved =
+              Array.isArray(t.approvedUsers) &&
+              t.approvedUsers.some(
+                (uid: any) =>
+                  (typeof uid === "object"
+                    ? uid._id || uid.id
+                    : uid
+                  ).toString() === currentUserId,
               )
-              return isOwner || isApproved
-            }
-          )
+            return isOwner || isApproved
+          })
           setTrips(myTrips)
           writeTrips(liveTrips)
         }
@@ -654,7 +678,9 @@ export default function Trips({
       setActionNotice(`Trip to ${newTrip.destination} created successfully!`)
       setTimeout(() => setActionNotice(null), 3500)
     } catch {
-      window.alert("Trip could not be saved. Check that the backend is running.")
+      window.alert(
+        "Trip could not be saved. Check that the backend is running.",
+      )
     }
   }
 
@@ -665,24 +691,28 @@ export default function Trips({
         t.id === tripId
           ? {
               ...t,
-              requestedUsers: (t.requestedUsers || []).filter((id) => id !== targetUserId),
-              requestedUsersDetails: ((t as any).requestedUsersDetails || []).filter(
-                (d: any) => (d.id || d._id) !== targetUserId
+              requestedUsers: (t.requestedUsers || []).filter(
+                (id) => id !== targetUserId,
               ),
+              requestedUsersDetails: (
+                (t as any).requestedUsersDetails || []
+              ).filter((d: any) => (d.id || d._id) !== targetUserId),
               approvedUsers: [...(t.approvedUsers || []), targetUserId],
             }
           : t,
-      )
+      ),
     )
 
     setSelected((prev) =>
       prev?.id === tripId
         ? {
             ...prev,
-            requestedUsers: (prev.requestedUsers || []).filter((id) => id !== targetUserId),
-            requestedUsersDetails: ((prev as any).requestedUsersDetails || []).filter(
-              (d: any) => (d.id || d._id) !== targetUserId
+            requestedUsers: (prev.requestedUsers || []).filter(
+              (id) => id !== targetUserId,
             ),
+            requestedUsersDetails: (
+              (prev as any).requestedUsersDetails || []
+            ).filter((d: any) => (d.id || d._id) !== targetUserId),
             approvedUsers: [...(prev.approvedUsers || []), targetUserId],
           }
         : prev,
@@ -706,23 +736,27 @@ export default function Trips({
         t.id === tripId
           ? {
               ...t,
-              requestedUsers: (t.requestedUsers || []).filter((id) => id !== targetUserId),
-              requestedUsersDetails: ((t as any).requestedUsersDetails || []).filter(
-                (d: any) => (d.id || d._id) !== targetUserId
+              requestedUsers: (t.requestedUsers || []).filter(
+                (id) => id !== targetUserId,
               ),
+              requestedUsersDetails: (
+                (t as any).requestedUsersDetails || []
+              ).filter((d: any) => (d.id || d._id) !== targetUserId),
             }
           : t,
-      )
+      ),
     )
 
     setSelected((prev) =>
       prev?.id === tripId
         ? {
             ...prev,
-            requestedUsers: (prev.requestedUsers || []).filter((id) => id !== targetUserId),
-            requestedUsersDetails: ((prev as any).requestedUsersDetails || []).filter(
-              (d: any) => (d.id || d._id) !== targetUserId
+            requestedUsers: (prev.requestedUsers || []).filter(
+              (id) => id !== targetUserId,
             ),
+            requestedUsersDetails: (
+              (prev as any).requestedUsersDetails || []
+            ).filter((d: any) => (d.id || d._id) !== targetUserId),
           }
         : prev,
     )
@@ -781,7 +815,9 @@ export default function Trips({
             Trip Management
           </h2>
           <p className="text-xs sm:text-sm mt-1" style={{ color: "#64748b" }}>
-            {trips.length} trip{trips.length !== 1 ? "s" : ""} planned · {allPendingRequests.length} pending join request{allPendingRequests.length !== 1 ? "s" : ""}
+            {trips.length} trip{trips.length !== 1 ? "s" : ""} planned ·{" "}
+            {allPendingRequests.length} pending join request
+            {allPendingRequests.length !== 1 ? "s" : ""}
           </p>
         </div>
         <button
@@ -820,7 +856,8 @@ export default function Trips({
                       {req.userName}
                     </p>
                     <p className="font-mono text-xs text-cyan-400 truncate">
-                      Wants to join: <span className="font-bold">{req.tripDestination}</span>
+                      Wants to join:{" "}
+                      <span className="font-bold">{req.tripDestination}</span>
                     </p>
                   </div>
                 </div>
@@ -859,7 +896,8 @@ export default function Trips({
             No trips planned yet
           </p>
           <p className="text-sm mb-6" style={{ color: "#64748b" }}>
-            Create your first trip or request to join fellow travelers on Browse Trips.
+            Create your first trip or request to join fellow travelers on Browse
+            Trips.
           </p>
           <button onClick={() => setShowCreate(true)} className="btn-primary">
             Create Your First Trip

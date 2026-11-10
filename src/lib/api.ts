@@ -1,12 +1,15 @@
 const getApiBase = () => {
   if (import.meta.env.VITE_API_URL) {
-    return `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api`
+    return `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api`
   }
   // If hosted on vercel or other domain without env var set, target live Render backend
-  if (typeof window !== 'undefined' && window.location.hostname.includes('vercel.app')) {
-    return 'https://matchandmap-withme.onrender.com/api'
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname.includes("vercel.app")
+  ) {
+    return "https://matchandmap-withme.onrender.com/api"
   }
-  return '/api'
+  return "/api"
 }
 
 export function getToken() {
@@ -21,12 +24,15 @@ export async function apiRequest<T>(path: string, options: RequestInit = {}) {
   if (token) headers.set("Authorization", `Bearer ${token}`)
 
   const baseUrl = getApiBase()
-  const cleanPath = path.startsWith('/') ? path : `/${path}`
-  
+  const cleanPath = path.startsWith("/") ? path : `/${path}`
+
   try {
-    const response = await fetch(`${baseUrl}${cleanPath}`, { ...options, headers })
+    const response = await fetch(`${baseUrl}${cleanPath}`, {
+      ...options,
+      headers,
+    })
     const contentType = response.headers.get("content-type") || ""
-    
+
     let data: any = null
     if (contentType.includes("application/json")) {
       data = await response.json().catch(() => null)
