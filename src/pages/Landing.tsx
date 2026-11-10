@@ -616,6 +616,36 @@ export default function Landing({ onNav, onBrowseTrips }: LandingProps) {
           </div>
         </div>
       )}
+      {/* FOOTER */}
+      <footer className="mt-16 border-t border-slate-800/60 py-8 px-6 text-center text-xs text-slate-400">
+        <div className="flex flex-wrap items-center justify-center gap-6 mb-3">
+          <button
+            type="button"
+            onClick={() => onNav("login")}
+            className="hover:text-slate-200 transition-colors"
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            onClick={() => onNav("register")}
+            className="hover:text-slate-200 transition-colors"
+          >
+            Join Free
+          </button>
+          <button
+            type="button"
+            onClick={() => onNav("login")}
+            className="text-purple-400 hover:text-purple-300 font-semibold transition-colors flex items-center gap-1"
+          >
+            <span>🛡️</span>
+            <span>Admin Portal</span>
+          </button>
+        </div>
+        <p className="text-slate-500">
+          © 2026 Match &amp; Map with me. Empowering sustainable &amp; secure travel across India.
+        </p>
+      </footer>
     </div>
   )
 }

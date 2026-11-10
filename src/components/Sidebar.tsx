@@ -86,7 +86,7 @@ export default function Sidebar({
       <nav className="flex-1 py-3 px-2 flex flex-col gap-0.5 overflow-y-auto">
         {(user.role === "admin"
           ? [
-              { view: "admin" as View, icon: "⬛", label: "Admin Panel" },
+              { view: "admin" as View, icon: "🛡️", label: "Admin Panel" },
               ...navItems,
             ]
           : navItems
