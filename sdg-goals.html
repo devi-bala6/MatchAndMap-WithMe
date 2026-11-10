@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sustainable Development Goals — Documentation Sheet</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #f1f5f9;
+      color: #000000;
+      font-family: "Times New Roman", Times, Georgia, serif;
+      padding: 20px;
+      line-height: 1.3;
+    }
+    .print-bar {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 999;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 1px solid #000;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .btn-dark {
+      background: #000000;
+      color: #ffffff;
+    }
+    .btn-dark:hover {
+      background: #333333;
+    }
+    .sheet-page {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px 28px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+      border: 1px solid #cbd5e1;
+    }
+
+    /* College Header */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 8px;
+    }
+    .logo-badge {
+      width: 70px;
+      text-align: center;
+      font-size: 9px;
+      font-weight: bold;
+      color: #475569;
+    }
+    .college-header {
+      flex: 1;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .college-name {
+      font-size: 17px;
+      font-weight: bold;
+      color: #000000;
+      letter-spacing: 0.2px;
+      text-transform: uppercase;
+    }
+    .college-sub {
+      font-size: 10.5px;
+      font-style: italic;
+      color: #000000;
+      margin-top: 1px;
+    }
+    .college-autonomous {
+      font-size: 11px;
+      font-weight: bold;
+      color: #000000;
+      margin-top: 2px;
+    }
+    .college-affil, .college-addr {
+      font-size: 10px;
+      color: #000000;
+      margin-top: 1px;
+    }
+
+    /* Title */
+    .doc-title {
+      text-align: center;
+      font-size: 14.5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 16px 0 14px 0;
+      color: #000000;
+    }
+
+    /* Top Project Table */
+    .project-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid #000000;
+      margin-bottom: 18px;
+      font-size: 12px;
+    }
+    .project-table th, .project-table td {
+      border: 1px solid #000000;
+      padding: 6px 10px;
+      vertical-align: middle;
+    }
+    .project-table th {
+      background-color: #ffffff;
+      font-weight: bold;
+      text-align: left;
+      width: 60%;
+    }
+    .project-table td {
+      font-weight: bold;
+    }
+
+    /* Main SDG Table */
+    .sdg-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid #000000;
+      font-size: 11.5px;
+    }
+    .sdg-table th, .sdg-table td {
+      border: 1px solid #000000;
+      padding: 5px 8px;
+      vertical-align: middle;
+    }
+    .sdg-table th {
+      background-color: #ffffff;
+      font-weight: bold;
+      text-align: left;
+    }
+    .sdg-table th.col-no {
+      width: 22%;
+    }
+    .sdg-table th.col-goal {
+      width: 78%;
+    }
+    .sdg-table td.cell-no {
+      font-weight: bold;
+    }
+    .highlight-row {
+      background-color: #f8fafc;
+      font-weight: bold;
+    }
+    .highlight-tag {
+      float: right;
+      font-size: 9.5px;
+      background: #0284c7;
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .sheet-page {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar">
+    <button class="btn btn-dark" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <div class="sheet-page">
+    <!-- College Header -->
+    <div class="header-container">
+      <div class="logo-badge">
+        <svg width="50" height="50" viewBox="0 0 100 100" style="display:block; margin:0 auto 2px auto;">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M30 65 L50 25 L70 65 Z" fill="none" stroke="#000" stroke-width="2"/>
+          <text x="50" y="80" text-anchor="middle" font-size="9" font-family="Arial" font-weight="bold">ESTD. 2009</text>
+        </svg>
+      </div>
+
+      <div class="college-header">
+        <div class="college-name">Rishi M.S Institute of Engineering &amp; Technology for Women</div>
+        <div class="college-sub">In memory of &ldquo;BHARAT RATNA&rdquo; (Late) Smt. M.S.Subbu Lakshmi</div>
+        <div class="college-autonomous">(UGC Autonomous)</div>
+        <div class="college-affil">Approved by AICTE, New Delhi and Affiliated to JNTU-H</div>
+        <div class="college-addr">Near JNTU Metro Station, Kukatpally, Hyderabad, Telangana &ndash; 500 085</div>
+      </div>
+
+      <div class="logo-badge">
+        <div style="border: 1px solid #000; border-radius: 50%; width: 44px; height: 44px; margin: 0 auto 3px auto; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold;">
+          NAAC A
+        </div>
+        <span style="font-size: 8.5px; font-weight: bold; border: 1px solid #000; padding: 1px 4px;">NBA</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <div class="doc-title">SUSTAINABLE DEVELOPMENT GOALS</div>
+
+    <!-- Project Box -->
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th>Project Title</th>
+          <th style="width: 40%;">SDG Goals</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Match&amp;Map with me &ndash; Travel Companion Matching &amp; Safety Platform</td>
+          <td>SDG &ndash; 5, 8, 9, 11</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Main SDG Table -->
+    <table class="sdg-table">
+      <thead>
+        <tr>
+          <th class="col-no">No.</th>
+          <th class="col-goal">SDG Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cell-no">SDG 1</td>
+          <td>No Poverty</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 2</td>
+          <td>Zero Hunger</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 3</td>
+          <td>Good Health and Well-being</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 4</td>
+          <td>Quality Education</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="cell-no">SDG 5</td>
+          <td>Gender Equality <span class="highlight-tag">Mapped</span></td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 6</td>
+          <td>Clean Water and Sanitation</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 7</td>
+          <td>Affordable and Clean Energy</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="cell-no">SDG 8</td>
+          <td>Decent Work and Economic Growth <span class="highlight-tag">Mapped</span></td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="cell-no">SDG 9</td>
+          <td>Industry, Innovation and Infrastructure <span class="highlight-tag">Mapped</span></td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 10</td>
+          <td>Reduced Inequalities</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="cell-no">SDG 11</td>
+          <td>Sustainable Cities and Communities <span class="highlight-tag">Mapped</span></td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 12</td>
+          <td>Responsible Consumption and Production</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 13</td>
+          <td>Climate Action</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 14</td>
+          <td>Life Below Water</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 15</td>
+          <td>Life on Land</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 16</td>
+          <td>Peace, Justice and Strong Institutions</td>
+        </tr>
+        <tr>
+          <td class="cell-no">SDG 17</td>
+          <td>Partnerships for the Goals</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+</html>
